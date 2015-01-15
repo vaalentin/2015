@@ -1,7 +1,6 @@
 'use strict';
 
 var jQuery = require('jquery');
-require('jquery.transit');
 
 function Slider ($el) {
   this.$el = $el;
