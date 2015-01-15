@@ -74,10 +74,10 @@ jQuery(function () {
 
   // images loader
   var imagesLoader = new ImagesLoader([
-    '../app/public/img/texture-ball.png',
-    '../app/public/img/texture-ballAlpha.png',
-    '../app/public/img/sprite-smoke.png',
-    '../app/public/img/sprite-AKQA.png'
+    './app/public/img/texture-ball.png',
+    './app/public/img/texture-ballAlpha.png',
+    './app/public/img/sprite-smoke.png',
+    './app/public/img/sprite-AKQA.png'
   ]);
 
   imagesLoader.start();

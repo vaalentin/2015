@@ -26,7 +26,7 @@ function Smoke (options) {
     data: []
   }, options);
 
-  var texture = new THREE.ImageUtils.loadTexture('../app/public/img/sprite-smoke.png');
+  var texture = new THREE.ImageUtils.loadTexture('./app/public/img/sprite-smoke.png');
   texture.flipY = false;
 
   var sprite = new SPRITE3D.Sprite(texture, {

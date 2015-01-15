@@ -45,33 +45,33 @@ var SOUNDS = (function () {
 
       background: new Howl({
         urls: [
-          '../app/public/sounds/background.mp3',
-          '../app/public/sounds/background.ogg',
-          '../app/public/sounds/background.wav'
+          './app/public/sounds/background.mp3',
+          './app/public/sounds/background.ogg',
+          './app/public/sounds/background.wav'
         ],
         loop: true,
         volume: 0.5
       }),
       wind: new Howl({
         urls: [
-          '../app/public/sounds/wind.mp3',
-          '../app/public/sounds/wind.ogg',
-          '../app/public/sounds/wind.wav'
+          './app/public/sounds/wind.mp3',
+          './app/public/sounds/wind.ogg',
+          './app/public/sounds/wind.wav'
         ]
       }),
       whitenoise: new Howl({
         urls: [
-          '../app/public/sounds/whitenoise.mp3',
-          '../app/public/sounds/whitenoise.ogg',
-          '../app/public/sounds/whitenoise.wav'
+          './app/public/sounds/whitenoise.mp3',
+          './app/public/sounds/whitenoise.ogg',
+          './app/public/sounds/whitenoise.wav'
         ],
         volume: 0.05
       }),
       neon: new Howl({
         urls: [
-          '../app/public/sounds/neon.mp3',
-          '../app/public/sounds/neon.ogg',
-          '../app/public/sounds/neon.wav'
+          './app/public/sounds/neon.mp3',
+          './app/public/sounds/neon.ogg',
+          './app/public/sounds/neon.wav'
         ],
         volume: 0.05
       })

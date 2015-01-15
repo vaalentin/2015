@@ -27,7 +27,7 @@ function Rocks () {
   var _this = this;
 
   var loader = new THREE.JSONLoader();
-  loader.load('../app/public/3D/rocks.js', function (geometry) {
+  loader.load('./app/public/3D/rocks.js', function (geometry) {
 
     var rocks = new THREE.Mesh(geometry, rocksMaterial);
     rocks.position.set(-70, 0, -30);

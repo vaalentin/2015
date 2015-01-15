@@ -11,7 +11,7 @@ function  Title () {
 }
 
 Title.prototype.init = function () {
-  var texture = new THREE.ImageUtils.loadTexture('../app/public/img/part-end.png');
+  var texture = new THREE.ImageUtils.loadTexture('./app/public/img/part-end.png');
   var material = new THREE.MeshBasicMaterial({
     map: texture,
     depthWrite: false,

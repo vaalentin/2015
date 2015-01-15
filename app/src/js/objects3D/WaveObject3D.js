@@ -71,7 +71,7 @@ function Wave (options) {
 }
 
 Wave.prototype.getPlane = function () {
-  var texture = THREE.ImageUtils.loadTexture('../app/public/img/texture-wave.png');
+  var texture = THREE.ImageUtils.loadTexture('./app/public/img/texture-wave.png');
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
   texture.repeat.set(20, 20);
 

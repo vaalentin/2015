@@ -7,13 +7,13 @@ var random = require('../utils/randomUtil');
 var yoyo = require('../utils/yoyoUtil');
 
 var matCap = require('../materials/matCapMaterial');
-matCap.uniforms.map.value = THREE.ImageUtils.loadTexture('../app/public/img/matCap-shiny.jpg');
+matCap.uniforms.map.value = THREE.ImageUtils.loadTexture('./app/public/img/matCap-shiny.jpg');
 
 function Face () {
   var group = new THREE.Object3D();
 
   var loader = new THREE.JSONLoader();
-  loader.load('../app/public/3D/face-hp.js', function (geometry) {
+  loader.load('./app/public/3D/face-hp.js', function (geometry) {
     var mesh = new THREE.Mesh(geometry, matCap);
     mesh.scale.x = 1.5;
     mesh.scale.y = 1.5;

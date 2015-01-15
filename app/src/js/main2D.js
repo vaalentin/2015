@@ -28,12 +28,12 @@ jQuery(function () {
 
   // images loader
   var imagesLoader = new ImagesLoader([
-    '../app/public/img/part-beam.png',
-    '../app/public/img/part-drop.png',
-    '../app/public/img/part-sphere.png',
-    '../app/public/img/part-grid.png',
-    '../app/public/img/part-field.png',
-    '../app/public/img/part-stars.png'
+    './app/public/img/part-beam.png',
+    './app/public/img/part-drop.png',
+    './app/public/img/part-sphere.png',
+    './app/public/img/part-grid.png',
+    './app/public/img/part-field.png',
+    './app/public/img/part-stars.png'
   ]);
 
   imagesLoader.onProgress(function (percent) {

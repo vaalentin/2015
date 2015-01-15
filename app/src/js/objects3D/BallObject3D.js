@@ -16,8 +16,8 @@ var glitchMaterial = require('../materials/glitchMaterial');
  * @requires jQuery, THREE, TWEEN, Animation, random, glitchMaterial
  */
 function Ball () {
-  var texture = THREE.ImageUtils.loadTexture('../app/public/img/texture-ball.png');
-  var textureAlpha = THREE.ImageUtils.loadTexture('../app/public/img/texture-ballAlpha.png');
+  var texture = THREE.ImageUtils.loadTexture('./app/public/img/texture-ball.png');
+  var textureAlpha = THREE.ImageUtils.loadTexture('./app/public/img/texture-ballAlpha.png');
   texture.wrapS = textureAlpha.wrapS = THREE.RepeatWrapping;
   texture.wrapT = textureAlpha.wrapT = THREE.RepeatWrapping;
   texture.repeat.x = textureAlpha.repeat.x = 0;

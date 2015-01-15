@@ -79,7 +79,7 @@ function Drop (options) {
 }
 
 Drop.prototype.getPlane = function () {
-  var texture = THREE.ImageUtils.loadTexture('../app/public/img/texture-drop.png');
+  var texture = THREE.ImageUtils.loadTexture('./app/public/img/texture-drop.png');
   
   var material = new THREE.MeshBasicMaterial({
     map: texture,

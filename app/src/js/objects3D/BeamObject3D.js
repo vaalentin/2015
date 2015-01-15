@@ -46,9 +46,9 @@ function Beam (options) {
   });
 
   // textures
-  var bodyTexture = THREE.ImageUtils.loadTexture('../app/public/img/texture-laserBody.png');
-  var capTexture = THREE.ImageUtils.loadTexture('../app/public/img/texture-laserCap.png');
-  var flareTexture = THREE.ImageUtils.loadTexture('../app/public/img/texture-laserFlare.png');
+  var bodyTexture = THREE.ImageUtils.loadTexture('./app/public/img/texture-laserBody.png');
+  var capTexture = THREE.ImageUtils.loadTexture('./app/public/img/texture-laserCap.png');
+  var flareTexture = THREE.ImageUtils.loadTexture('./app/public/img/texture-laserFlare.png');
 
   // materials
   var lineMaterial = new THREE.LineBasicMaterial({ color: parameters.color });

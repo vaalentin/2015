@@ -59,7 +59,7 @@ Face.prototype.init = function () {
   var _this = this;
 
   var loader = new THREE.JSONLoader();
-  loader.load('../app/public/3D/face.js', function (geometry) {
+  loader.load('./app/public/3D/face.js', function (geometry) {
         
     var face = new THREE.Mesh(geometry, material);
     face.rotation.set(0, 0.2, 0.2);
