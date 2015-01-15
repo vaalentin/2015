@@ -1,0 +1,69 @@
+@import '../mixins/inlineBlock';
+@import '../mixins/transition';
+@import '../mixins/borderRadius';
+
+// global
+.slider {
+  position: relative;
+  top: 50%;
+
+  max-width: 460px;
+  height: 600px;
+  margin: 0 auto;
+}
+
+// slides
+.slider__slides {
+  position: absolute;
+
+  height: 100%;
+}
+
+// slide
+.slider__slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  opacity: 0;
+
+  .transition(opacity .3s ease-in-out);
+}
+
+.slider__slide.is-active {
+  opacity: 1;
+}
+
+// slider content
+.slider__slide__content {
+  padding: 20px;
+}
+
+
+// map
+.slider__map {
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+
+  text-align: center;
+}
+
+.slider__map__node {
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+
+  cursor: pointer;
+
+  background-color: #222;
+
+  .inline-block;
+  .border-radius(50%);
+  .transition(background-color .3s ease-in-out);
+}
+
+.slider__map__node.is-active {
+  background-color: #fff;
+}

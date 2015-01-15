@@ -1,0 +1,58 @@
+@import '../mixins/transition';
+@import '../mixins/borderRadius';
+
+@nodeSize: 10px;
+
+.map {
+  position: fixed;
+  z-index: 999;
+  top: 50%;
+  right: 20px;
+
+  opacity: .5;
+
+  .transition(opacity .3s ease-in-out);
+}
+
+.map:hover {
+  opacity: 1;
+}
+
+.map__node {
+  position: relative;
+
+  width: @nodeSize;
+  height: @nodeSize;
+  margin-bottom: @nodeSize;
+
+  cursor: pointer;
+
+  background-color: #222;
+
+  opacity: 0;
+  right: -30px;
+
+  .border-radius(50%);
+  .transition(background-color .3s ease-in-out);
+}
+
+.map__node__background {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  .border-radius(50%);
+  .transition(border 1s ease-in-out, margin 1s ease-in-out);
+}
+
+.map__node.is-active {
+  background-color: #fff;
+}
+
+.map__node.is-active .map__node__background {
+  margin-top: -3px;
+  margin-left: -3px;
+
+  border: 3px solid #fff;
+}

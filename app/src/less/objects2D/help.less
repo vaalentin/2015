@@ -1,0 +1,50 @@
+@import '../mixins/inlineBlock';
+
+// general
+.help {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+
+  display: none;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+  background-color: #0a0a0a;
+}
+
+// sections
+.help__layout {
+  margin-bottom: 130px;
+}
+
+.help__navigation {
+  margin-bottom: 100px;
+
+  text-align: center;
+}
+
+// positionning
+.help__navigation {
+  .mouse,
+  .keys {
+    margin: 0 20px;
+
+    .inline-block;
+  }
+}
+
+// button
+.help__quit {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+
+  width: 25px;
+  height: 20px;
+
+  cursor: pointer;
+}

@@ -1,0 +1,66 @@
+@import '../mixins/borderRadius';
+
+@mouseThickBorder: 2px;
+@mouseThinBorder: 1px;
+
+.mouse {
+  position: relative;
+
+  width: 85px;
+}
+
+.mouse__body {
+  position: relative;
+
+  height: 140px;
+
+  opacity: .2;
+  border: @mouseThickBorder solid #fff;
+
+  .border-radius(40px);
+}
+
+.mouse__body__line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  width: @mouseThinBorder;
+  height: 25px;
+
+  background-color: #fff;
+}
+
+.mouse__wheel {
+  position: absolute;
+  top: 25px + @mouseThickBorder;
+  left: 50%;
+
+  overflow: hidden;
+
+  width: 14px;
+  height: 26px;
+  margin-left: -(14px / 2) - (@mouseThickBorder / 2);
+
+  opacity: .2;
+  border: @mouseThickBorder solid #fff;
+
+  .border-radius(10px);
+}
+
+.mouse__wheel__lines {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+}
+
+.mouse__wheel__line {
+  position: relative;
+
+  width: 100%;
+  height: @mouseThinBorder;
+  margin-top: 40%;
+
+  background-color: #fff;
+}

@@ -1,0 +1,90 @@
+'use strict';
+  
+var jQuery = require('jquery');
+var THREE = require('three');
+var TweenLite = require('tweenlite');
+
+var random = require('../utils/randomUtil');
+
+/**
+ * Animated strip
+ *
+ * @class Strip
+ * @constructor
+ * @param {Object} [options]
+ * @param {Number} [options.color='#ffffff'] Strip's color
+ * @param {Number} [options.width=3] Strip's width once expanded
+ * @param {Number} [options.height=1] Strip's height
+ * @param {Number} [options.speed=1000] Animation's speed
+ * @param {Number} [options.delay=0] Animation's delay
+ * @requires jQuery, THREE, TWEEN, Animation
+ */
+function Strip (options) {
+  // private
+  var parameters = jQuery.extend({
+    count: 10,
+    colors: ['#ffffff'],
+    width: 10,
+    height: 3,
+    speed: 1,
+    delay: 0,
+    rangeX: [-50, 50],
+    rangeY: [-50, 50],
+    rangeZ: [-50, 50]
+  }, options);
+
+  var materials = {};
+
+  var geometry = new THREE.PlaneGeometry(parameters.width, parameters.height);
+
+  var group = new THREE.Object3D();
+
+  for (var i = 0; i < parameters.count; i++) {
+    var x = random(parameters.rangeX[0], parameters.rangeX[1]);
+    var y = random(parameters.rangeY[0], parameters.rangeY[1]);
+    var z = random(parameters.rangeZ[0], parameters.rangeZ[1]);
+
+    var material;
+    var color = parameters.colors[random(0, parameters.colors.length, true)];
+    
+    if (!materials[color]) {
+      material = new THREE.MeshBasicMaterial({
+        color: color,
+        side: THREE.DoubleSide
+      });
+
+      materials[color] = material;
+    }
+
+    var mesh = new THREE.Mesh(geometry, materials[color]);
+    mesh.position.set(x, y, z);
+    group.add(mesh);
+  }
+
+  // cache values
+  var from = geometry.vertices[0].x;
+  var to = geometry.vertices[1].x;
+
+  geometry.vertices[1].x = geometry.vertices[3].x = geometry.vertices[0].x;
+
+  var cache = { x: from };
+
+  function update () {
+    geometry.vertices[1].x = geometry.vertices[3].x = this.target.x;
+
+    geometry.verticesNeedUpdate = true;
+    geometry.computeBoundingSphere();
+  }
+
+  this.el = group;
+
+  this.in = function () {
+    TweenLite.to(cache, parameters.speed, { x: to, onUpdate: update });
+  };
+
+  this.out = function () {
+    TweenLite.to(cache, parameters.speed, { x: from, onUpdate: update });
+  };
+}
+
+module.exports = Strip;

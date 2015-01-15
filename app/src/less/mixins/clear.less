@@ -1,0 +1,12 @@
+.clear {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+
+    content: ' ';
+  }
+  &:after {
+    clear: both;
+  }
+}

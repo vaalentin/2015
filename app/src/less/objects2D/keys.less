@@ -1,0 +1,83 @@
+@keyThickBorder: 2px;
+@keySize: 48px;
+@keyMargin: 10px;
+
+.keys {
+  position: relative;
+  top: 20px;
+
+  width: (3 * @keySize) + (2 * @keyMargin) + (2 * @keyThickBorder);
+  height: (2 * @keySize) + @keyMargin + (2 * @keyThickBorder);
+}
+
+.key {
+  position: absolute;
+
+  width: @keySize;
+  height: @keySize;
+
+  opacity: .2;
+  border: @keyThickBorder solid #fff;
+
+  .border-radius(6px);
+}
+
+.key--left {
+  bottom: 0;
+  left: 0;
+}
+
+.key--right {
+  bottom: 0;
+  left: 2 * (@keySize + @keyMargin);
+}
+
+.key--bottom {
+  bottom: 0;
+  left: @keySize + @keyMargin;
+}
+
+.key--top {
+  bottom: @keySize + @keyMargin;
+  left: @keySize + @keyMargin;
+}
+
+.key__triangle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  margin-top: -5px;
+  margin-left: -5px;
+
+  background-image: url('../../../public/img/sprite-icons.png');
+}
+
+.key__triangle--top,
+.key__triangle--bottom {
+  width: 11px;
+  height: 8px;
+}
+
+.key__triangle--left,
+.key__triangle--right {
+  width: 8px;
+  height: 11px;
+}
+
+.key__triangle--left {
+  background-position: 17px 0;
+}
+
+.key__triangle--right {
+  background-position: 9px 0;
+}
+
+.key__triangle--top {
+  background-position: 0 0;
+  background-position: 0 -1px;
+}
+
+.key__triangle--bottom {
+  background-position: 0 -10px;
+}

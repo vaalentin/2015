@@ -1,0 +1,331 @@
+@import '../../mixins/clear';
+@import '../../mixins/transition';
+
+// viewport
+.heads__viewport {
+  display: none;
+}
+
+.heads__sections {
+  position: relative;
+
+  overflow-x: hidden;
+
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// sections
+.heads__section {
+  position: relative;
+  z-index: 1;
+
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px;
+
+  .clear;
+}
+
+.heads__section--hello {
+  height: 800px;
+}
+
+.heads__section--beams {
+  height: 800px;
+}
+
+.heads__section--drop {
+  height: 500px;
+}
+
+.heads__section--ball {
+  height: 600px;
+}
+
+.heads__section--flow {
+  height: 1000px;
+}
+
+.heads__section--height {
+  height: 1000px;
+}
+
+.heads__section--face {
+  height: 800px;
+}
+
+.heads__section--rocks {
+  height: 600px;
+}
+
+.heads__section--galaxy {
+  height: 800px;
+}
+
+.heads__section--gravity {
+  height: 800px;
+}
+
+.heads__section--end {
+  height: 800px;
+}
+
+// parts
+.part {
+  position: absolute;
+}
+
+// titles
+.part--title {
+  z-index: 3;
+}
+
+.hello__title {
+  top: 35%;
+
+  width: 100%;
+
+  text-align: center;
+}
+
+.drop__title {
+  left: 20%;
+}
+
+.ball__title {
+  top: 30%;
+  left: 75%;
+}
+
+.rocks__title {
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+.galaxy__title {
+  width: 100%;
+  top: 100%;
+  left: 0;
+}
+
+.height__title {
+  top: 40%;
+}
+
+.face__title {
+  top: 50%;
+  left: 70%;
+}
+
+.end__title {
+  top: 40%;
+  right: 0;
+  left: 0;
+
+  text-align: center;
+}
+
+// images
+.part--smoke {
+  left: 50%;
+
+  width: 793px;
+  height: 695px;
+  margin-left: -(793px / 2);
+
+  background-image: url('../../../public/img/part-smoke.png');
+}
+
+.flow__smoke {
+  z-index: 2;
+  top: 170px;
+
+  opacity: .5;
+}
+
+.part--beam--left,
+.part--beam--center,
+.part--beam--right {
+  width: 228px;
+  height: 1214px;
+
+  background-image: url('../../../public/img/part-beam.png');
+}
+
+.part--beam--left {
+  top: -350px;
+  left: 30%;
+
+  margin-left: -(228px / 2);
+
+  opacity: .1;
+}
+
+.part--beam--center {
+  top: -160px;
+  left: 50%;
+
+  margin-left: -(228px / 2);
+}
+
+.part--beam--right {
+  top: -300px;
+  left: 70%;
+
+  margin-left: -(228px / 2);
+
+  opacity: .3;
+}
+
+.part--drop {
+  top: 0;
+  left: 50%;
+
+  width: 928px;
+  height: 501px;
+  margin-left: -(928px / 2);
+
+  opacity: .5;
+  background-image: url('../../../public/img/part-drop.png');
+}
+
+.part--grid {
+  top: 0;
+  left: 50%;
+
+  width: 478px;
+  height: 588px;
+  margin-left: -478px;
+
+  background-image: url('../../../public/img/part-grid.png');
+}
+
+.part--sphere {
+  z-index: 2;
+  top: 150px;
+  left: 50%;
+
+  width: 340px;
+  height: 340px;
+  margin-left: -(340px / 2);
+
+  background-image: url('../../../public/img/part-sphere.png');
+}
+
+.part--field {
+  z-index: 2;
+  top: -300px;
+  left: 50%;
+
+  width: 717px;
+  height: 1554px;
+  margin-left: -(717px / 2);
+
+  background-image: url('../../../public/img/part-field.png');
+}
+
+.part--neons {
+  z-index: 3;
+  top: 170px;
+  left: 50%;
+
+  width: 437px;
+  height: 542px;
+  margin-left: -(437px / 2);
+
+  background-image: url('../../../public/img/part-neons.png');
+}
+
+.part--height {
+  top: 0;
+  left: 70%;
+
+  width: 997px;
+  height: 884px;
+  margin-left: -(997px / 2);
+
+  background-image: url('../../../public/img/part-height.png');
+}
+
+.part--face {
+  top: 10%;
+  left: 40%;
+
+  width: 413px;
+  height: 605px;
+  margin-left: -(413px / 2);
+
+  background-image: url('../../../public/img/part-face.png');
+}
+
+.part--rocks {
+  top: 20%;
+  left: 50%;
+
+  width: 980px;
+  height: 606px;
+  margin-left: -(980px / 2);
+
+  background-image: url('../../../public/img/part-rocks.jpg');
+}
+
+.part--galaxy {
+  top: 50%;
+  left: 50%;
+
+  width: 853px;
+  height: 545px;
+  margin-left: -(853px / 2);
+
+  background-image: url('../../../public/img/part-galaxy.jpg');
+}
+
+.part--gravity {
+  top: 40%;
+  left: 50%;
+
+  width: 1164px;
+  height: 419px;
+  margin-left: -(1164px / 2);
+
+  background-image: url('../../../public/img/part-gravity.jpg');
+}
+
+.part--stars {
+  position: absolute;
+  z-index: 1;
+  z-index: 2;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  max-width: 1280px;
+  height: 100%;
+  margin: 0 auto;
+
+  opacity: .5;
+  background-image: url('../../../public/img/part-stars.png');
+  background-repeat: repeat-y;
+}
+
+@media screen and (max-width: 600px) {
+  .hello__title,
+  .drop__title,
+  .ball__title,
+  .height__title {
+    left: 0;
+
+    width: 100%;
+  }
+
+  .text--left,
+  .text--right {
+    text-align: center;
+  }
+
+  .drop__title {
+    top: 40%;
+  }
+}

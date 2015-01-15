@@ -1,0 +1,12 @@
+{
+  "name": "2015",
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "threejs": "r68",
+    "normalize-css": "~3.0.2",
+    "howler": "~1.1.25",
+    "visibly.js": "~0.1.0",
+    "skrollr": "~0.6.29",
+    "gsap": "~1.15.0"
+  }
+}

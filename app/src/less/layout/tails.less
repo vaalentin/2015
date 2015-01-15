@@ -1,0 +1,75 @@
+@import '../mixins/clear';
+@import '../mixins/transform';
+
+// general
+.tails {
+  background-color: #fff;
+}
+
+// sections
+.tails__section {
+  position: relative;
+
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 50px;
+
+  .clear;
+  will-change: transform;
+}
+
+.tails__section:last-child {
+  padding-bottom: 200px;
+}
+
+.tails__link {
+  font-size: 24px;
+
+  display: block;
+
+  margin: 40px 0;
+
+  color: #121212;
+}
+
+.tails__section__el {
+  position: relative;
+
+  opacity: 0;
+
+  .transform(translateY(100px));
+}
+
+.tails__column {
+  float: left;
+
+  width: 50%;
+}
+
+.tails__column--left {
+  float: left;
+}
+
+.tails__column--right {
+  float: right;
+}
+
+.tails__column__container--left {
+  padding-right: 50px;
+}
+
+.tails__column__container--right {
+  padding-left: 50px;
+}
+
+@media screen and (max-width: 600px) {
+  .tails__column {
+    float: none;
+
+    width: 100%;
+  }
+
+  .tails__column__container {
+    padding: 0;
+  }
+}
