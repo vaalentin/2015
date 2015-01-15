@@ -22,7 +22,7 @@ var TweenLite = require('tweenlite');
 function TextPanel (text, options) {
   var parameters = jQuery.extend({
     size: 100,
-    font: 'Futura',
+    font: 'Futura, Trebuchet MS, Arial, sans-serif',
     style: 'Bold',
     align: 'center',
     lineSpacing: 20,
