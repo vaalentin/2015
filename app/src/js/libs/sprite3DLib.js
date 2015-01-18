@@ -10,7 +10,6 @@ var THREE = require('three');
  * @requires jQuery, THREE
  */
 var SPRITE3D = SPRITE3D || (function () {
-
   var sprites = [];
   var previousTime = Date.now();
 
@@ -137,7 +136,7 @@ SPRITE3D.Sprite.prototype.stop = function () {
 };
 
 /**
- * Update thre Sprite (called by SPRITE3D.Update)
+ * Update thre Sprite
  *
  * @method update
  * @param {Number} [delta] Time delta (time elapsed since last update)
@@ -170,7 +169,6 @@ SPRITE3D.Sprite.prototype.update = function (delta) {
   }
 
   return true;
-
 };
 
 module.exports = SPRITE3D;

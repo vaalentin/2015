@@ -5,6 +5,13 @@ var TweenLite = require('tweenlite');
 
 var yoyo = require('../utils/yoyoUtil');
 
+/**
+ * 3D Rocks
+ *
+ * @class Rocks
+ * @constructor
+ * @requires THREE, TweenLite, yoyo
+ */
 function Rocks () {
   var group = new THREE.Object3D();
 
@@ -28,7 +35,6 @@ function Rocks () {
 
   var loader = new THREE.JSONLoader();
   loader.load('./app/public/3D/rocks.js', function (geometry) {
-
     var rocks = new THREE.Mesh(geometry, rocksMaterial);
     rocks.position.set(-70, 0, -30);
     group.add(rocks);
@@ -84,6 +90,12 @@ function Rocks () {
   this.stop = this.in;
 }
 
+/**
+ * Get white sphere
+ *
+ * @method getSphere
+ * @return {THREE.Mesh}
+ */
 Rocks.prototype.getSphere = function () {
   var material = new THREE.MeshBasicMaterial({ color: '#0a0a0a', fog: false });
   var geometry = new THREE.SphereGeometry(5, 20, 20);
@@ -94,6 +106,12 @@ Rocks.prototype.getSphere = function () {
   return mesh;
 };
 
+/**
+ * Get light
+ *
+ * @method getLight
+ * @return {THREE.Light}
+ */
 Rocks.prototype.getLight = function () {
   var light = new THREE.PointLight('#ffffff', 0, 50);
   light.position.set(0, 11, -40);

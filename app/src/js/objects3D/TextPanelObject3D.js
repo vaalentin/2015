@@ -9,15 +9,15 @@ var TweenLite = require('tweenlite');
  *
  * @class TextPanel
  * @constructor
- * @param {String} [text] Text to display, use '\n' to break
+ * @param {String} [text] Text to display, use '\n' for line break
  * @param {Object} [options]
  * @param {Number} [options.size=100] Font size
- * @param {String} [options.font='Futura'] Font
+ * @param {String} [options.font='Futura'] Fonts
  * @param {String} [options.style='Bold'] Font style
- * @param {String} [options.align='center'] center, left or right
- * @param {Number} [options.lineSpacing=20] Height between each line
- * @param {String} [options.color='rgba(200, 200, 200, 1)'] Text's color
- * @requires jQuery, THREE, TWEEN
+ * @param {String} [options.align='center'] Center, left or right
+ * @param {Number} [options.lineSpacing=20] Height lines
+ * @param {String} [options.color='rgba(200, 200, 200, 1)'] Text color
+ * @requires jQuery, THREE, TweenLite
  */
 function TextPanel (text, options) {
   var parameters = jQuery.extend({
@@ -113,7 +113,6 @@ function TextPanel (text, options) {
 
   group.visible = false;
 
-  // animations
   this.el = group;
 
   var cache = { y: mesh.position.y, opacity: mesh.material.opacity };

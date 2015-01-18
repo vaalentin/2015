@@ -1,32 +1,28 @@
 'use strict';
 
-// polyfills
 require('./polyfills/animFramePolyfill');
 require('./polyfills/bindPolyfill');
 require('./polyfills/indexOfPolyfill');
 
-// vendor
 var jQuery = require('jquery');
 var skrollr = require('skrollr');
 require('./libs/waypointLib');
   
-// modules
 var HASH = require('./modules/hashModule');
 
-// classes
 var ImagesLoader = require('./classes/LoaderClass');
 
-// objects 2D
 var Loader = require('./objects2D/LoaderObject2D');
 var Help = require('./objects2D/HelpObject2D');
 var Menu = require('./objects2D/menuObject2D');
 var Wireframe = require('./objects2D/WireframeObject2D');
 
 jQuery(function () {
-  // loader
-  var loader = new Loader();
+  HASH.replacePlaceholders();
 
-  // images loader
+  var loader = new Loader();
+  var help = new Help();
+  var menu = Menu();
   var imagesLoader = new ImagesLoader([
     './app/public/img/part-beam.png',
     './app/public/img/part-drop.png',
@@ -42,17 +38,7 @@ jQuery(function () {
 
   imagesLoader.start();
 
-  // replace placeholders
-  HASH.replacePlaceholders();
-  
-  // help
-  var help = new Help();
-
-  var menu = Menu();
-  menu.onClick(function (name) {
-    
-  });
-  
+  // heads
   skrollr.init();
 
   // tails
@@ -98,5 +84,4 @@ jQuery(function () {
       menu.in();
     }, 1500);
   });
-
 });

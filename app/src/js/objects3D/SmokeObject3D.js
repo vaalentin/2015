@@ -14,9 +14,9 @@ var random = require('../utils/randomUtil');
  * @param {Object} [options]
  * @param {String} [options.frontColor='#9b69b2'] Front layers color
  * @param {String} [options.backColor='#e1455f'] Back layers color
- * @param {Number} [options.layers=5] Plane's number
- * @param {Array} [options.data] Non random values
- * @requires jQuery, THREE, SPRITE3D, Animation, random
+ * @param {Number} [options.layers=5] Planes number
+ * @param {Array} [options.data=[]] Non random values
+ * @requires jQuery, THREE, SPRITE3D, random
  */
 function Smoke (options) {
   var parameters = jQuery.extend({

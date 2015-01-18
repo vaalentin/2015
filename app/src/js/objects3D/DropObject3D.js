@@ -12,10 +12,10 @@ var loop = require('../utils/loopUtil');
  * @class Drop
  * @constructor
  * @param {Object} [options]
- * @param {Number} [options.count=6] Ring's number
- * @param {String} [options.color='#ffffff'] Ring's color
- * @param {Number} [options.amplitude=2] Ring's max amplitude once expanded
- * @requires jQuery, THREE, TWEEN, Animation, random
+ * @param {Number} [options.count=6] Rings number
+ * @param {String} [options.color='#ffffff'] Rings color
+ * @param {Number} [options.amplitude=2] Rings max expanded amplitude 
+ * @requires jQuery, THREE, TweenLite, loop
  */
 function Drop (options) {
   this.parameters = jQuery.extend({
@@ -78,6 +78,12 @@ function Drop (options) {
   delete this.parameters;
 }
 
+/**
+ * Get water ripple plane
+ *
+ * @method getPlane
+ * @return {THREE.Mesh}
+ */
 Drop.prototype.getPlane = function () {
   var texture = THREE.ImageUtils.loadTexture('./app/public/img/texture-drop.png');
   
@@ -97,6 +103,14 @@ Drop.prototype.getPlane = function () {
   return new THREE.Mesh(geometry, material);
 };
 
+/**
+ * Get ripple animation
+ *
+ * @method getTween
+ * @param {THREE.Mesh} [plane]
+ * @param {Number} [index]
+ * @return {TweenLite}
+ */
 Drop.prototype.getTween = function (plane, index) {
   var cache = { scale: 0.1, opacity: 1 };
   var scale = (index + 1) * (this.parameters.amplitude) / this.parameters.count;

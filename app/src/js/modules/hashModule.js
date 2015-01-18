@@ -10,15 +10,9 @@ var jQuery = require('jquery');
  * @requires jQuery
  */
 var HASH = HASH || (function () {
-    
   var instance = null;
 
-  /**
-   * @method initialize
-   */
   function init () {
-
-    // map hash with name
     var agencies = {
       akqa: 'AKQA',
       eli: 'Eli',
@@ -30,23 +24,10 @@ var HASH = HASH || (function () {
       ultranoir: 'Ultra Noir'
     }
 
-    /**
-     * Get the current hash
-     *
-     * @method getHash
-     * @return {String}
-     */
     function getHash () {
       return window.location.hash.split('#')[1];
     }
 
-    /**
-     * Get corresponding name
-     *
-     * @method getAgency
-     * @apram {String} [hash]
-     * @return {String}
-     */
     function getAgency (hash) {
       var agency;
 

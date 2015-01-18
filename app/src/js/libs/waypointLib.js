@@ -7,9 +7,18 @@ var jQuery = require('jquery');
 var debounce = require('../utils/debounceUtil');
 
 module.exports = (function ($) {
-
+  /**
+   * Trigger event on element when they enter/leave viewport
+   *
+   * @class waypoint
+   * @constructor
+   * @param {Object} [options]
+   * @param {jQuery} [options.$viewport=jQuery(window)] Viewport
+   * @param {Number} [options.offset=0] Offset
+   * @param {Number} [options.startAt=null] Start after certain distance (for performances)
+   * @requires jQuery, debounce
+   */
   $.fn.waypoint = function (options) {
-    
     var isInContainer = options.$viewport ? true : false;
 
     var parameters = $.extend({
@@ -25,6 +34,7 @@ module.exports = (function ($) {
     var scrollTop = $viewport.scrollTop();
     var threshold = viewportHeight * (parameters.offset / 100);
 
+    // Store height and top on elements to avoid consecutive computations
     function cacheAttributes () {
       $els.each(function () {
         var $el = $(this);
@@ -89,6 +99,11 @@ module.exports = (function ($) {
     }, 20);
 
     return {
+      /**
+       * Start waypoint
+       *
+       * @method start
+       */
       start: function () {
         $(window).on('resize', onResize);
         $viewport.on('scroll', onScroll);
@@ -96,6 +111,11 @@ module.exports = (function ($) {
         onScroll();
       },
 
+      /**
+       * Stop waypoint
+       *
+       * @method stop
+       */
       stop: function () {
         $(window).off('resize', onResize);
         $viewport.off('scroll', onScroll);

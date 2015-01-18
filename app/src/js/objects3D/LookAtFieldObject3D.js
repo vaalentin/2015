@@ -6,6 +6,15 @@ var TweenLite = require('tweenlite');
 
 var random = require('../utils/randomUtil');
 
+/**
+ * Cloud of meshes looking at the same coordinates
+ *
+ * @class LookAtField
+ * @constructor
+ * @param {Object} [options]
+ * @param {Number} [options.count=100] Meshes number
+ * @requires jQuery, THREE, TweenLite, random
+ */
 function LookAtField (options) {
   var parameters = jQuery.extend({
     count: 100
@@ -45,6 +54,8 @@ function LookAtField (options) {
     }
   }
 
+  this.el = group;
+
   this.in = function () {
     group.visible = true;
     TweenLite.to(center, 2, { y: 0, onUpdate: update });
@@ -55,8 +66,6 @@ function LookAtField (options) {
     TweenLite.to(center, 1, { y: 50, onUpdate: update, onComplete: function () { group.visible = false; } });
     TweenLite.to(group.position, 1, { y: -50 });
   }
-
-  this.el = group;
 }
 
 module.exports = LookAtField;

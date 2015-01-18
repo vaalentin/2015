@@ -2,6 +2,13 @@
 
 var jQuery = require('jquery');
 
+/**
+ * Animated layout
+ *
+ * @class Layout
+ * @constructor
+ * @requires jQuery
+ */
 function Layout ($el) {
   this.$el = $el;
 
@@ -17,6 +24,11 @@ function Layout ($el) {
   this.interval = null;
 }
 
+/**
+ * Animation next step
+ *
+ * @method slide
+ */
 Layout.prototype.slide = function () {
   // update targets
   if (this.y === 0) {
@@ -101,6 +113,11 @@ Layout.prototype.slide = function () {
   moveMouse();
 };
 
+/**
+ * Start animation
+ *
+ * @method start
+ */
 Layout.prototype.start = function () {
   var _this = this;
 
@@ -111,6 +128,11 @@ Layout.prototype.start = function () {
   }, 4000);
 };
 
+/**
+ * Stop animation
+ *
+ * @method stop
+ */
 Layout.prototype.stop = function () {
   window.clearInterval(this.interval);
 };

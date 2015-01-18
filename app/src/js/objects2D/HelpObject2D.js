@@ -8,6 +8,13 @@ var Layout = require('../objects2D/LayoutObject2D');
 var Mouse = require('../objects2D/MouseObject2D');
 var Keys = require('../objects2D/KeysObject2D');
 
+/**
+ * Help overlay
+ *
+ * @class Help
+ * @constructor
+ * @requires jQuery, Sider, Layout, Mouse, Keys
+ */
 function Help () {
   this.$el = jQuery('.help');
   this.slider = new Slider(this.$el.find('.slider'));
@@ -17,6 +24,11 @@ function Help () {
   this.layout = new Layout(this.$el.find('.layout'));
 }
 
+/**
+ * In animation
+ *
+ * @method in
+ */
 Help.prototype.in = function () {
   var _this = this;
 
@@ -44,6 +56,11 @@ Help.prototype.in = function () {
   });
 };
 
+/**
+ * Out animation
+ *
+ * @method out
+ */
 Help.prototype.out = function () {
   var _this = this;
 

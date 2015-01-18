@@ -6,6 +6,13 @@ var TweenLite = require('tweenlite');
 var SPRITE3D = require('../libs/sprite3DLib');
 var HASH = require('../modules/hashModule');
 
+/**
+ * Hello title
+ *
+ * @class Title
+ * @constructor
+ * @requires THREE, TweenLite, SPRITE3D, HASH
+ */
 function Title () {
   var path;
 
@@ -53,11 +60,9 @@ function Title () {
     material.opacity = cache.opacity;
   }
 
-  // animations
   var cache = { y: 20, opacity: 0 };
   var inTween = TweenLite.to(cache, 1, { y: 0, opacity: 1, paused: true, onUpdate: update});
 
-  // exports
   this.el = plane;
 
   this.in = function () {

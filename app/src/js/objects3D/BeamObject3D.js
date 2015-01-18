@@ -13,12 +13,12 @@ var yoyo = require('../utils/yoyoUtil');
  * @class Beam
  * @constructor
  * @param {Object} [options]
- * @param {String} [options.color='#ffffff'] Beam's color
- * @param {Number} [options.height=15] Height the beam will expand to
- * @param {Number} [options.width=2] Beam's width
- * @param {Number} [options.cubeSize=0.5] Size of the cube at the lower extremity
- * @param {Number} [options.delay=0] Delay before animations
- * @requires jQuery, THREE, TWEEN, Animation, random
+ * @param {String} [options.color='#ffffff'] Beam color
+ * @param {Number} [options.height=15] Beam expanded height
+ * @param {Number} [options.width=2] Beam width
+ * @param {Number} [options.cubeSize=0.5] Extremity cube size
+ * @param {Number} [options.delay=0] Animations delay
+ * @requires jQuery, THREE, TweenLite, random, yoyo
  */
 function Beam (options) {
   var parameters = jQuery.extend({
@@ -34,7 +34,6 @@ function Beam (options) {
 
   var group = new THREE.Object3D();
 
-  // base material
   var baseMaterial = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide,
     depthWrite: false,
@@ -45,24 +44,20 @@ function Beam (options) {
     color: parameters.color
   });
 
-  // textures
   var bodyTexture = THREE.ImageUtils.loadTexture('./app/public/img/texture-laserBody.png');
   var capTexture = THREE.ImageUtils.loadTexture('./app/public/img/texture-laserCap.png');
   var flareTexture = THREE.ImageUtils.loadTexture('./app/public/img/texture-laserFlare.png');
 
-  // materials
   var lineMaterial = new THREE.LineBasicMaterial({ color: parameters.color });
   var bodyMaterial = baseMaterial.clone();
   var capMaterial = baseMaterial.clone();
   var flareMaterial = baseMaterial.clone();
   var cubeMaterial = baseMaterial.clone();
 
-  // assign textures to materials
   bodyMaterial.map = bodyTexture;
   capMaterial.map = capTexture;
   flareMaterial.map = flareTexture;
 
-  // geometries
   var bodyGeometry = new THREE.PlaneGeometry(width, height, 1, 1);
   var capGeometry = new THREE.PlaneGeometry(width, width, 1, 1);
   var flareGeometry = new THREE.PlaneGeometry(10, 10, 1, 1);
@@ -78,7 +73,6 @@ function Beam (options) {
   bodyGeometry.verticesNeedUpdate = true;
   bodyGeometry.computeBoundingSphere();
 
-  // meshes
   var bodyMesh = new THREE.Mesh(bodyGeometry, bodyMaterial);
   var capMeshTop = new THREE.Mesh(capGeometry, capMaterial);
   var capMeshBottom = capMeshTop.clone();
@@ -177,7 +171,6 @@ function Beam (options) {
       })
   };
 
-  // exports
   this.el = group;
 
   var delay = parameters.delay;

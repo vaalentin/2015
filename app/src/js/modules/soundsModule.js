@@ -11,14 +11,8 @@ var visibly = require('visibly');
  * @requires Howler, visibly
  */
 var SOUNDS = (function () {
-
   var instance;
 
-  /**
-   * Initialize SOUNDS instance
-   *
-   * @method init
-   */
   function init () {
 
     var isMuted = false;
@@ -39,6 +33,11 @@ var SOUNDS = (function () {
         isMuted = !isMuted;
       },
 
+      /**
+       * Is muted
+       * @method isMuted
+       * @return {Boolean}
+       */
       isMuted: function () {
         return Howler._muted;
       },
@@ -103,7 +102,5 @@ visibly.onHidden(function () {
 visibly.onVisible(function () {
   Howler.unmute();
 });
-
-// Howler.mute();
 
 module.exports = SOUNDS.getInstance();

@@ -20,7 +20,7 @@ function Mouse ($el) {
 }
 
 /**
- * Animate the wheel
+ * Animate wheel
  *
  * @method scroll
  */
@@ -41,7 +41,7 @@ Mouse.prototype.scroll = function () {
 };
 
 /**
- * Start the animation
+ * Start animation
  *
  * @method start
  */
@@ -54,7 +54,7 @@ Mouse.prototype.start = function () {
 };
 
 /**
- * Stop the animation
+ * Stop animation
  *
  * @method stop
  */

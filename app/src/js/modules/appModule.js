@@ -1,9 +1,7 @@
 'use strict';
 
-// vendor
 var jQuery = require('jquery');
 
-// classes
 var Events = require('../classes/EventsClass');
 
 /**
@@ -12,23 +10,14 @@ var Events = require('../classes/EventsClass');
  * @module APP
  * @event [heads:visible] Heads is at least partially in the viewport
  * @event [heads:invisible] Heads is completely out of the viewport
- * @requires jQuery, Events, FEATURES
+ * @requires jQuery, Events
  */
 var APP = (function () {
-
   var instance;
 
-  /**
-   * Initialize APP instance
-   *
-   * @method init
-   * @return {APP}
-   */
   function init () {
-    // Event bus
     var events = new Events();
 
-    // DOM Elements
     var $trigger = jQuery('.trigger');
     var $heads = jQuery('.heads');
     var $tails = jQuery('.tails');
@@ -39,21 +28,12 @@ var APP = (function () {
     // init scroll
     jQuery('body').stop().animate({ scrollTop: 0 }, 2000);
 
-    /**
-     * Setup navigation
-     *
-     * @method navigation
-     */
     function navigation () {
 
       var isOpen = false;
       var isSliding = false;
 
-      /**
-       * Update the location of the trigger area
-       *
-       * @method updateTrigger
-       */
+      // Update the location of the trigger area
       function updateTrigger () {
         var properties;
 
@@ -66,9 +46,6 @@ var APP = (function () {
         $trigger.css(properties);
       }
 
-      /**
-       * @method open
-       */
       function open () {
         if (isSliding) {
           return false;
@@ -93,9 +70,6 @@ var APP = (function () {
         $tails.stop().animate(props, { duration: 400, easing: 'swing' });
       }
 
-      /**
-       * @method close
-       */
       function close () {
         if (isSliding) {
           return false;
@@ -125,11 +99,7 @@ var APP = (function () {
         $tails.stop().animate(props, { duration: 400, easing: 'swing', complete: onComplete });
       }
 
-      /**
-       * Slide between heads and tails 
-       *
-       * @method slide
-       */
+      // Slide between heads and tails 
       function slide (callback) {
         isSliding = true;
 
@@ -181,7 +151,6 @@ var APP = (function () {
         updateTrigger();
       }
 
-      // events listening
       $trigger.on({
         mouseenter: function () {
           open();
@@ -201,15 +170,8 @@ var APP = (function () {
       $infoHeads.css('opacity', 0);
     }
 
-    /**
-     * Setup APP
-     *
-     * @method setup
-     * @return {APP}
-     */
     function setup () {
       navigation();
-
       return APP.getInstance();
     }
 

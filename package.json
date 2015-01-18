@@ -50,7 +50,6 @@
         "tweenlite.bezier"
       ]
     },
-    "stats": "global:Stats",
     "howler": "global:Howler",
     "howl": "global:Howl",
     "visibly": "global:visibly",

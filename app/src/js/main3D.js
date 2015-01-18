@@ -1,34 +1,27 @@
 'use strict';
 
-// polyfills
 require('./polyfills/animFramePolyfill');
 require('./polyfills/bindPolyfill');
 require('./polyfills/indexOfPolyfill');
 
-// vendor
 var jQuery = require('jquery');
 var TweenLite = require('tweenlite');
 TweenLite.defaultEase = window.Quad.easeInOut;
 
-// libs
 require('./libs/waypointLib');
   
-// modules
 var APP = require('./modules/appModule');
 var SCENE = require('./modules/sceneModule');
 var SOUNDS = require('./modules/soundsModule');
 var HASH = require('./modules/hashModule');
 
-// classes
 var ImagesLoader = require('./classes/LoaderClass');
 
-// objects 2d
 var Loader = require('./objects2D/LoaderObject2D');
 var Menu = require('./objects2D/menuObject2D');
 var Help = require('./objects2D/HelpObject2D');
 var Wireframe = require('./objects2D/WireframeObject2D');
 
-// sections
 var helloSection = require('./sections/helloSection');
 var beamsSection = require('./sections/beamsSection');
 var dropSection = require('./sections/dropSection');
@@ -44,35 +37,11 @@ var gravitySection = require('./sections/gravitySection');
 var endSection = require('./sections/endSection');
 
 jQuery(function () {
-
   HASH.replacePlaceholders();
 
-  // loader
   var loader = new Loader();
-  
-  // help
   var help = new Help();
-
-  // menu
   var menu = Menu();
-
-  menu.onClick(function () {
-    var $el = jQuery(this);
-    var name = $el.attr('data-button') || '';
-
-    if (name === 'sounds') {
-      SOUNDS.toggle();
-      $el.html(SOUNDS.isMuted() ? 'UNMUTE' : 'MUTE');
-    } else if (name === 'help') {
-      help.in();
-    } else if (name === 'quality') {
-      var text = $el.html();
-      $el.html(text === 'QUALITY 0.5' ? 'QUALITY 1' : 'QUALITY 0.5');
-      SCENE.quality(text === 'QUALITY 0.5' ? 0.5 : 1);
-    }
-  });
-
-  // images loader
   var imagesLoader = new ImagesLoader([
     './app/public/img/texture-ball.png',
     './app/public/img/texture-ballAlpha.png',
@@ -80,6 +49,7 @@ jQuery(function () {
     './app/public/img/sprite-AKQA.png'
   ]);
 
+  // preload
   imagesLoader.start();
 
   imagesLoader.onProgress(function (percent) {
@@ -95,6 +65,22 @@ jQuery(function () {
       menu.in();
     });
   });
+
+  menu.onClick(function () {
+    var $el = jQuery(this);
+    var name = $el.attr('data-button') || '';
+
+    if (name === 'sounds') {
+      SOUNDS.toggle();
+      $el.html(SOUNDS.isMuted() ? 'UNMUTE' : 'MUTE');
+    } else if (name === 'help') {
+      help.in();
+    } else if (name === 'quality') {
+      var text = $el.html();
+      $el.html(text === 'QUALITY 0.5' ? 'QUALITY 1' : 'QUALITY 0.5');
+      SCENE.quality(text === 'QUALITY 0.5' ? 0.5 : 1);
+    }
+  });  
     
   // scene
   var $heads = jQuery('.heads');
@@ -436,7 +422,6 @@ jQuery(function () {
     }
   });
 
-  // APP events
   APP.on('slideBegin', function () {
     var to = this.to;
 
@@ -474,7 +459,4 @@ jQuery(function () {
   SCENE.start();
 
   SOUNDS.background.fadeIn(1, 2000);
-
-  // jQuery('.heads__viewport canvas').css('display', 'none');
-
 });

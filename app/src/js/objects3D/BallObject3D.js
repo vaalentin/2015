@@ -13,7 +13,7 @@ var glitchMaterial = require('../materials/glitchMaterial');
  *
  * @class Ball
  * @constructor
- * @requires jQuery, THREE, TWEEN, Animation, random, glitchMaterial
+ * @requires THREE, TweenLite, SOUNDS, random, yoyo, glitchMaterial
  */
 function Ball () {
   var texture = THREE.ImageUtils.loadTexture('./app/public/img/texture-ball.png');
@@ -36,15 +36,10 @@ function Ball () {
 
   var mesh = new THREE.Mesh(geometry, materialStripe);
 
-  // Blink
   var colorA = new THREE.Color('#000000');
   var colorB = new THREE.Color('#ffffff');
 
-  /**
-   * Make the ball blink once
-   *
-   * @method blink
-   */
+  // Make the ball blink once
   function blink () {
     materialStripe.emissive = colorB;
     materialStripe.color = colorA;
@@ -55,11 +50,7 @@ function Ball () {
     });
   }
 
-  /**
-   * Make the ball glitch once
-   *
-   * @method glitch
-   */
+  // Make the ball glitch once
   function glitch () {
     mesh.material = glitchMaterial;
 
@@ -134,7 +125,6 @@ function Ball () {
       })
   };
 
-  // exports
   this.el = mesh;
 
   this.in = function () {

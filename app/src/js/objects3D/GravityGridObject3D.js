@@ -15,7 +15,9 @@ var random = require('../utils/randomUtil');
  * @param {Object} [options]
  * @param {Number} [options.stepsX=10] x steps
  * @param {Number} [options.stepsY=10] y steps
- * @param {Number} [options.stepSize=2] Step's size
+ * @param {Number} [options.stepSize=2] Step's size,
+ * @param {String} [options.linesFromColor='#ffffff'] Height min color
+ * @param {String} [options.linesToColor='#333333'] Height max color
  * @requires jQuery, THREE
  */
 function Grid (options) {
@@ -178,6 +180,12 @@ Grid.prototype.resetForce = function () {
   }
 };
 
+/**
+ * Get grid total size
+ *
+ * @method getSize
+ * @return {Object}
+ */
 Grid.prototype.getSize = function () {
   var width = (this.parameters.stepsX - 1) * this.parameters.stepSize;
   var height = (this.parameters.stepsY - 1) * this.parameters.stepSize;

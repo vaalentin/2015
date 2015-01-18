@@ -2,6 +2,13 @@
 
 var jQuery = require('jquery');
 
+/**
+ * Slider
+ *
+ * @class Slider
+ * @constructor
+ * @requires jQuery
+ */
 function Slider ($el) {
   this.$el = $el;
 
@@ -69,6 +76,11 @@ function Slider ($el) {
   this.onResize();
 }
 
+/**
+ * Go to next slide
+ *
+ * @method next
+ */
 Slider.prototype.next = function () {
   this.current++;
 
@@ -79,6 +91,11 @@ Slider.prototype.next = function () {
   this.goTo(this.current);
 };
 
+/**
+ * Go to previous slide
+ *
+ * @method prev
+ */
 Slider.prototype.prev = function () {
   this.current--;
 
@@ -89,6 +106,12 @@ Slider.prototype.prev = function () {
   this.goTo(this.current);
 };
 
+/**
+ * Go to a specific slide
+ *
+ * @method goTo
+ * @param {Number} [index] Slide's index
+ */
 Slider.prototype.goTo = function (index) {
   var target = -(index * 100) + '%';
 
@@ -100,13 +123,23 @@ Slider.prototype.goTo = function (index) {
   jQuery(this.$slides[index]).addClass('is-active');
 };
 
+/**
+ * Update control nodes
+ *
+ * @method updateMap
+ * @param {Number} [index] Current index
+ */
 Slider.prototype.updateMap = function (index) {
   this.$nodes.removeClass('is-active');
   jQuery(this.$nodes[index]).addClass('is-active');
 };
 
+/**
+ * Start the slider
+ *
+ * @method start
+ */
 Slider.prototype.start = function () {
-  // node's click
   this.$nodes.on('click', function () {
     var index = jQuery(this).index();
     _this.goTo(index);
@@ -130,18 +163,20 @@ Slider.prototype.start = function () {
     }
   });
 
-  // listen for resize
   jQuery(window).on('resize', this.onResize);
   this.onResize();
 };
 
+/**
+ * Stop the slider
+ *
+ * @method next
+ */
 Slider.prototype.stop = function () {
-  // unbind listeners
   this.$nodes.off('click');
   this.$el.off('mouseenter mouseleave');
   jQuery(window).off('resize', this.onResize);
 
-  // kill interval
   window.clearInterval(this.interval);
 };
 

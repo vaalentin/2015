@@ -9,6 +9,13 @@ var yoyo = require('../utils/yoyoUtil');
 var matCap = require('../materials/matCapMaterial');
 matCap.uniforms.map.value = THREE.ImageUtils.loadTexture('./app/public/img/matCap-shiny.jpg');
 
+/**
+ * 3D face
+ *
+ * @class Face
+ * @constructor
+ * @requires THREE, TweenLite, random, yoyo, matCap
+ */
 function Face () {
   var group = new THREE.Object3D();
 

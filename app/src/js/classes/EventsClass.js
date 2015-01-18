@@ -12,7 +12,7 @@ function Events () {
 }
 
 /**
- * Register event and return id
+ * Register event
  *
  * @method on
  * @param {String} [name]

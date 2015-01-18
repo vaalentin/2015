@@ -4,13 +4,23 @@
 
 var jQuery = require('jquery');
 
+/**
+ * Animated wireframe
+ *
+ * @class Wireframe
+ * @constructor
+ * @param {jQuery} [$el] DOM element
+ * @param {Object} [options]
+ * @param {Number} [options.delay] Delay between frames
+ * @param {Array} [options.positions] Animated scroll positions
+ * @requires jQuery
+ */
 function Wireframe ($el, options) {
   this.parameters = jQuery.extend({
     delay: 200,
     positions: [-20, -90, -135, -200, -20, 40]
   }, options);
 
-  // els
   this.$topLines = $el.find('.wireframe__frame--top');
   this.$bottomLines = $el.find('.wireframe__frame--bottom');
   this.$leftLines = $el.find('.wireframe__frame--left');
@@ -19,12 +29,17 @@ function Wireframe ($el, options) {
   this.$textLines = $el.find('.wireframe__text__line');
   this.$controlNodes = $el.find('.wireframe__controls__node');
 
-  // vars
   this.interval = null;
   this.totalPositions = this.parameters.positions.length;
   this.currentPosition = 0;
 }
 
+/**
+ * In animation
+ *
+ * @method in
+ * @param {Boolean} [out] Out instead of in?
+ */
 Wireframe.prototype.in = function (out) {
   var _this = this;
 
@@ -90,6 +105,11 @@ Wireframe.prototype.in = function (out) {
   });
 };
 
+/**
+ * Out animation
+ *
+ * @method out
+ */
 Wireframe.prototype.out = function () {
   this.$topLines.css('width', 0);
   this.$bottomLines.css('width', 0);
@@ -99,6 +119,11 @@ Wireframe.prototype.out = function () {
   this.$controlNodes.css('top', 30);
 };
 
+/**
+ * Start animation
+ *
+ * @method start
+ */
 Wireframe.prototype.start = function () {
   if (this.interval) {
     return false;
@@ -119,6 +144,11 @@ Wireframe.prototype.start = function () {
   this.interval = setInterval(update, 2000);
 };
 
+/**
+ * Stop animation
+ *
+ * @method stop
+ */
 Wireframe.prototype.stop = function () {
   if (!this.interval) {
     return false;

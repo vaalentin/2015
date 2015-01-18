@@ -38,7 +38,7 @@ Keys.prototype.highlight = function () {
 };
 
 /**
- * Start the animation
+ * Start animation
  *
  * @method start
  */
@@ -51,7 +51,7 @@ Keys.prototype.start = function () {
 };
 
 /**
- * Stop the animation
+ * Stop animation
  *
  * @method stop
  */

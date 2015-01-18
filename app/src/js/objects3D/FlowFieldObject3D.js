@@ -23,7 +23,7 @@ var map = require('../utils/mapUtil');
  * @param {Number} [options.renderResolution=100] SubCurves render precision (=subdivisions)
  * @param {String} [options.mainColor='#ffffff'] MainCurve's color
  * @param {String} [options.subsColor='#4c4c4c'] SubCurves color
- * @requires jQuery, THREE, TWEEN, Animation, random, noise, map
+ * @requires jQuery, THREE, TweenLite, random, noise, map
  */
 function FlowField (points, options) {
   this.parameters = jQuery.extend({
@@ -91,6 +91,12 @@ function FlowField (points, options) {
   delete this.parameters;
 }
 
+/**
+ * Get main and subs curves
+ *
+ * @method getCurves
+ * @return {Object}
+ */
 FlowField.prototype.getCurves = function (points) {
   var main = new THREE.SplineCurve3(points);
 
@@ -127,6 +133,14 @@ FlowField.prototype.getCurves = function (points) {
   };
 };
 
+/**
+ * Get lines
+ *
+ * @method getLines
+ * @param {THREE.SplineCurve3} [main] Main curve
+ * @param {Array} [subs] Sub curves
+ * @return {Array}
+ */
 FlowField.prototype.getLines = function (main, subs) {
   var lines = [];
 
@@ -155,6 +169,13 @@ FlowField.prototype.getLines = function (main, subs) {
   return lines;
 };
 
+/**
+ * Get in animation
+ *
+ * @method getInTween
+ * @param {THREE.Line} [line] Line to animate
+ * @return {TweenLite}
+ */
 FlowField.prototype.getInTween = function (line) {
   return TweenLite.to({}, random(1, 3), { paused: true,
       onComplete: function () {
@@ -174,6 +195,14 @@ FlowField.prototype.getInTween = function (line) {
     });
 };
 
+/**
+ * Get follow animatiom
+ *
+ * @method getFollor
+ * @param {THREE.Mesh} Mesh following
+ * @param {Array} Curves
+ * @return {Object}
+ */
 FlowField.prototype.getFollow = function (mesh, curves) {
   var meshes = [];
   var tweens = [];

@@ -8,7 +8,7 @@ var THREE = require('three');
  * @class Section
  * @constructor
  * @param {String} [name]
- * @requires THREE, Events
+ * @requires THREE
  */
 function Section (name) {
   this.name = name;
@@ -34,21 +34,28 @@ Section.prototype.add = function (object) {
 };
 
 /**
+ * Section's in animation
+ *
  * @method in
+ * @param {String} [way]
  */
 Section.prototype.in = function (way) {
   this._in(way);
 };
 
 /**
+ * Section's out animation
+ *
  * @method out
- * @param {Number} [way]
+ * @param {String} [way]
  */
 Section.prototype.out = function (way) {
   this._out(way);
 };
 
 /**
+ * Start the section
+ *
  * @method start
  */
 Section.prototype.start = function () {
@@ -62,6 +69,8 @@ Section.prototype.start = function () {
 };
 
 /**
+ * Stop the section
+ *
  * @method stop
  */
 Section.prototype.stop = function () {
@@ -75,6 +84,8 @@ Section.prototype.stop = function () {
 };
 
 /**
+ * Pass the in handler
+ *
  * @method onIn
  * @param {Function} [callback]
  */
@@ -83,6 +94,8 @@ Section.prototype.onIn = function (callback) {
 };
 
 /**
+ * Pass the out handler
+ *
  * @method onOut
  * @param {Function} [callback]
  */
@@ -91,6 +104,8 @@ Section.prototype.onOut = function (callback) {
 };
 
 /**
+ * Pass the start handler
+ *
  * @method onStart
  * @param {Function} [callback]
  */
@@ -99,6 +114,8 @@ Section.prototype.onStart = function (callback) {
 };
 
 /**
+ * Pass the stop handler
+ *
  * @method onStop
  * @param {Function} [callback]
  */

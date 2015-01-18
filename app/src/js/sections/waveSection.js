@@ -11,10 +11,7 @@ var wave = new Wave();
 waveSection.add(wave.el);
 
 var text = new TextPanel(
-  'E  Y  E  S    O  N    T  H  E\n H  O  R  I  Z  O  N',
-  // 'EYES ON THE HORIZON'
-  // 'HORIZON IN SIGHT'
-  // 'H  O  R  I  Z  O  N \n I  N    S  I  G  H  T',
+  'E  Y  E  S    O  N    T  H  E \n H  O  R  I  Z  O  N',
   {
     align: 'center',
     style: '',

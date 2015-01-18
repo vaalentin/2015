@@ -14,11 +14,11 @@ var yoyo = require('../utils/yoyoUtil');
  * @class Neon
  * @constructor
  * @params {Object} [options]
- * @params {String} [options.color='#ffffff'] Neon's color
- * @params {Number} [options.width=20] Neon's width
+ * @params {String} [options.color='#ffffff'] Neon color
+ * @params {Number} [options.width=20] Neon width
  * @params {Boolean} [options.projection=true] Projection halo?
- * @params {Boolean} [options.flicker=true] Flicker?
- * @requires jQuery, THREE, TWEEN, random
+ * @params {Boolean} [options.planes=3] Glow planes
+ * @requires jQuery, THREE, TweenLite, SOUNDS, random, yoyo
  */
 function Neon (options) {
   this.parameters = jQuery.extend({
@@ -49,11 +49,7 @@ function Neon (options) {
   var totalFlicker = random(3, 6, true);
   var flickering = false;
 
-  /**
-   * Flick once from off to on
-   *
-   * @method flickOn
-   */
+  // Flick once from off to on
   function flickOn () {
     tube.material.emissive.set(_this.parameters.color);
     tube.material.needsUpdate = true;
@@ -78,11 +74,7 @@ function Neon (options) {
     });
   }
 
-  /**
-   * Flick once from on to off
-   *
-   * @method flickOff
-   */
+  // Flick once from on to off
   function flickOff () {
     flickering = !flickering;
     
@@ -155,6 +147,12 @@ function Neon (options) {
   };
 }
 
+/**
+ * Get neon tube
+ *
+ * @method getTube
+ * @return {THREE.Mesh}
+ */
 Neon.prototype.getTube = function () {
   var geometry = new THREE.CylinderGeometry(0.2, 0.2, this.parameters.width, 6);
   var material = new THREE.MeshLambertMaterial({
@@ -166,6 +164,12 @@ Neon.prototype.getTube = function () {
   return mesh;
 };
 
+/**
+ * Get neon single glow
+ *
+ * @method getGlow
+ * @return {THREE.Mesh}
+ */
 Neon.prototype.getGlow = function () {
   var texture = new THREE.ImageUtils.loadTexture('./app/public/img/texture-neonGlow.png');
   var material = new THREE.MeshBasicMaterial({
@@ -185,6 +189,13 @@ Neon.prototype.getGlow = function () {
   return mesh;
 };
 
+/**
+ * Get neon glows
+ *
+ * @method getGlows
+ * @param {THREE.Mesh} [glow]
+ * @return {THREE.Object3D}
+ */
 Neon.prototype.getGlows = function (glow) {
   var glows = new THREE.Object3D();
 
@@ -197,6 +208,12 @@ Neon.prototype.getGlows = function (glow) {
   return glows;
 };
 
+/**
+ * Get neon projection
+ *
+ * @method getProjection
+ * @return {THREE.Mesh}
+ */
 Neon.prototype.getProjection = function () {
   var texture = THREE.ImageUtils.loadTexture('./app/public/img/texture-neonProjection.png');
   var material = new THREE.MeshBasicMaterial({

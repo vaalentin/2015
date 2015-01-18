@@ -6,6 +6,19 @@ var TweenLite = require('tweenlite');
 
 var loop = require('../utils/loopUtil');
 
+/**
+ * Animated wave
+ *
+ * @class Wave
+ * @constructor
+ * @param {Object} [options]
+ * @param {Object} [options.amplitude=10] Vertical amplitude
+ * @param {Object} [options.divisionSize=2] Grid division size
+ * @param {Object} [options.divisionX=50] X axis divisions
+ * @param {Object} [options.divisionY=50] Y axis divisions
+ * @param {Object} [options.speed=10] Animation speed
+ * @requires jQuery, THREE, TweenLite, loop
+ */
 function Wave (options) {
   this.parameters = jQuery.extend({
     amplitude: 10,
@@ -70,6 +83,12 @@ function Wave (options) {
   delete this.parameters;
 }
 
+/**
+ * Get wave's plane
+ *
+ * @method getPlane
+ * @return {THREE.Mesh}
+ */
 Wave.prototype.getPlane = function () {
   var texture = THREE.ImageUtils.loadTexture('./app/public/img/texture-wave.png');
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;

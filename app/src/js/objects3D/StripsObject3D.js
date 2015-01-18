@@ -12,22 +12,23 @@ var random = require('../utils/randomUtil');
  * @class Strip
  * @constructor
  * @param {Object} [options]
- * @param {Number} [options.color='#ffffff'] Strip's color
- * @param {Number} [options.width=3] Strip's width once expanded
- * @param {Number} [options.height=1] Strip's height
- * @param {Number} [options.speed=1000] Animation's speed
- * @param {Number} [options.delay=0] Animation's delay
- * @requires jQuery, THREE, TWEEN, Animation
+ * @pram {Number} [options.count=10] Strips count
+ * @pram {Array} [options.colors=['#ffffff']] Strips colors
+ * @pram {Number} [options.width=10] Strip width
+ * @pram {Number} [options.height=3] Strip height
+ * @pram {Number} [options.speed=1] Animations speed
+ * @pram {Array} [options.rangeX=[-50, 50]] X position range
+ * @pram {Array} [options.rangeY=[-50, 50]] Y position range
+ * @pram {Array} [options.rangeZ=[-50, 50]] Z position range
+ * @requires jQuery, THREE, TweenLite, random
  */
 function Strip (options) {
-  // private
   var parameters = jQuery.extend({
     count: 10,
     colors: ['#ffffff'],
     width: 10,
     height: 3,
     speed: 1,
-    delay: 0,
     rangeX: [-50, 50],
     rangeY: [-50, 50],
     rangeZ: [-50, 50]

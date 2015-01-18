@@ -2,6 +2,13 @@
 
 var jQuery = require('jquery');
 
+/**
+ * Menu
+ *
+ * @class Menu
+ * @constructor
+ * @requires jQuery
+ */
 function Menu () {
   var $el = jQuery('.menu');
   var $button = $el.find('.menu__button');
@@ -23,7 +30,6 @@ function Menu () {
     $items.each(function (i) {
       var $el = jQuery(this);
 
-      // delay isn't canceled by stop(), we are using timeouts instead
       var timeout = window.setTimeout(function () {
         $el.stop().animate({ opacity: 1 }, 400);
       }, i * 200);

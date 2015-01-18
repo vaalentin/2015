@@ -7,7 +7,6 @@ var random = require('../utils/randomUtil');
 
 /**
  * Background floating lines
- * can be animated on camera movements
  *
  * @class BackgroundLines
  * @constructor
@@ -40,6 +39,12 @@ function BackgroundLines (options) {
   this.line = line;
 }
 
+/**
+ * Get base line
+ *
+ * @method getLine
+ * @return {THREE.Line} 
+ */
 BackgroundLines.prototype.getLine = function () {
   var material = new THREE.LineBasicMaterial();
 
@@ -52,12 +57,24 @@ BackgroundLines.prototype.getLine = function () {
   return line;  
 };
 
+/**
+ * Update lines Y size
+ *
+ * @method updateY
+ * @param {Number} [speed]
+ */
 BackgroundLines.prototype.updateY = function (speed) {
   this.line.geometry.vertices[0].y = speed + 0.2;
   this.line.geometry.verticesNeedUpdate = true;
   this.line.geometry.computeBoundingSphere();
 };
 
+/**
+ * Update lines Z size
+ *
+ * @method updateZ
+ * @param {Number} [speed]
+ */
 BackgroundLines.prototype.updateZ = function (speed) {
   this.line.geometry.vertices[0].z = speed;
   this.line.geometry.verticesNeedUpdate = true;

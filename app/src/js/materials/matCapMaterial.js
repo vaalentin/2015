@@ -39,9 +39,7 @@ var sphereEnvMapShader = new THREE.ShaderMaterial({
         'gl_FragColor = vec4( base, 1. );',
     '}'
 
-  ].join('\n'),
-  // shading: THREE.SmoothShading,
-  // side: THREE.DoubleSide
+  ].join('\n')
 });
 
 module.exports = sphereEnvMapShader;

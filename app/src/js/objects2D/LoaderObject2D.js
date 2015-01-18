@@ -2,12 +2,24 @@
 
 var jQuery = require('jquery');
 
+/**
+ * Preloader
+ *
+ * @class Loader
+ * @constructor
+ * @requires jQuery
+ */
 function Loader () {
   this.$el = jQuery('.loader');
   this.$title = this.$el.find('.loader__title');
   this.$progress = this.$el.find('.loader__progress');
 }
 
+/**
+ * Out animation
+ *
+ * @method out
+ */
 Loader.prototype.out = function () {
   var _this = this;
 
@@ -21,6 +33,12 @@ Loader.prototype.out = function () {
   });
 };
 
+/**
+ * Update the percent loaded
+ *
+ * @method update
+ * @param {Number} [percent]
+ */
 Loader.prototype.update = function (percent) {
   // this.$progress.stop().animate({ width: percent + '%'}, 500);
 };

@@ -14,11 +14,11 @@ var loop = require('../utils/loopUtil');
  * @class Galaxy
  * @constructor
  * @param {Object} [options]
- * @param {String} [ringFromColor='#ffffff']
- * @param {String} [ringToColor='#333333']
- * @param {Number} [ringDivisio=100]
- * @param {Number} [ringColorSteps=30]
- * @requires THREE, TweenLite, extend, random, map, loop
+ * @param {String} [ringFromColor='#ffffff'] Off color
+ * @param {String} [ringToColor='#333333'] On color
+ * @param {Number} [ringDivisions=100] Rings divisions
+ * @param {Number} [ringColorSteps=30] Gradient steps
+ * @requires jQuery, THREE, TweenLite, random, map, loop
  */
 function Galaxy (options) {
   this.parameters = jQuery.extend({
@@ -76,7 +76,6 @@ function Galaxy (options) {
     }
   }
 
-  // animations
   var cache = { rotationX: 0, rotationY: 0 };
 
   function update () {
@@ -140,6 +139,8 @@ function Galaxy (options) {
 }
 
 /**
+ * Get base planet
+ *
  * @method getPlanet
  * @return {THREE.Mesh}
  */
@@ -152,6 +153,8 @@ Galaxy.prototype.getPlanet = function () {
 };
 
 /**
+ * Get base ring
+ *
  * @method getRing
  * @return {THREE.Line}
  */

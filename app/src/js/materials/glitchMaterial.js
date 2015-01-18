@@ -2,9 +2,6 @@
 
 var THREE = require('three');
 
-/** 
- * glitch material
- */
 var glitch = new THREE.ShaderMaterial({
   uniforms: {
     time: { type: 'f', value: 10.0 },
@@ -46,7 +43,6 @@ var glitch = new THREE.ShaderMaterial({
       'for (float i = 0.0; i < 1.0; i++) {',
         'p = rota(p, time + length(p * 0.1) * (20.0 * cos(time * 0.5)));',
         'float s = 2.0;',
-        //'float dy = 1.0 / (100.0 * abs(p.y * s));',
         'float dy = 1.0 / (5.0 * abs(p.y * s));',
         'gl_FragColor += vec4(dy * 0.1 * dy, 0.5 * dy, dy, 1.0);',
       '}',

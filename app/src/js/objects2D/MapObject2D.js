@@ -57,7 +57,7 @@ Map.prototype.init = function () {
 };
 
 /**
- * Set the onClick callback
+ * Set onClick callback
  *
  * @method onClick
  * @param {Function} [callback]
@@ -67,8 +67,7 @@ Map.prototype.onClick = function (callback) {
 };
   
 /**
- * Set the active node
- * css class .is-active
+ * Set active node (.is-active)
  *
  * @method setActive
  * @param {Number} [index]
@@ -78,6 +77,11 @@ Map.prototype.setActive = function (index) {
   jQuery(this.$nodes[index]).addClass('is-active');
 };
 
+/**
+ * In animation
+ *
+ * @method in
+ */
 Map.prototype.in = function () {
   this.$nodes.each(function (i) {
     jQuery(this).delay(i * 50).animate({ right: 0, opacity: 1 }, 500);

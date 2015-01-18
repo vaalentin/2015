@@ -1,24 +1,17 @@
 'use strict';
 
-// vendor
 var jQuery = require('jquery');
 var THREE = require('three');
 var TweenLite = require('tweenlite');
-var Stats = require('stats');
 
-// libs
 var SPRITE3D = require('../libs/sprite3DLib');
 
-// modules
 var SOUNDS = require('../modules/soundsModule');
 
-// classes
 var Events = require('../classes/EventsClass');
 
-// objects2D
 var Map = require('../objects2D/MapObject2D');
 
-// objects3D
 var BackgroundParticles = require('../objects3D/BackgroundParticlesObject3D');
 var BackgroundLines = require('../objects3D/BackgroundLinesObject3D');
 
@@ -28,18 +21,11 @@ var BackgroundLines = require('../objects3D/BackgroundLinesObject3D');
  * @module SCENE
  * @event [section:changeBegin]
  * @event [section:changeComplete]
- * @requires jQuery, THREE, TWEEN, Stats, SPRITE3D, SOUNDS, Events, Map, BackgroundParticles, BackgroundLines
+ * @requires jQuery, THREE, TweenLite, SPRITE3D, SOUNDS, Events, Map, BackgroundParticles, BackgroundLines
  */
 var SCENE = (function () {
-
   var instance;
 
-  /**
-   * Initialize SCENE instance
-   *
-   * @method init
-   * @return {SCENE}
-   */
   function init () {
     // params
     var parameters = {
@@ -88,18 +74,7 @@ var SCENE = (function () {
     // events
     var events = new Events();
 
-    /**
-     * Setup navigation
-     *
-     * @method navigation
-     */
     function navigation () {
-
-      /**
-       * Go to the next section
-       *
-       * @method next
-       */
       function next () {
         if (currentIndex === totalSections) {
           if (!isLocked) {
@@ -114,11 +89,6 @@ var SCENE = (function () {
         animateCamera(currentIndex);
       }
 
-      /**
-       * Go to previous section
-       *
-       * @method prev
-       */
       function prev () {
         if (currentIndex === 0) {
           return false;
@@ -139,7 +109,6 @@ var SCENE = (function () {
         var elapsed = newDate.getTime() - oldDate.getTime();
 
         // handle scroll smoothing (mac trackpad for instance)
-        // reject event if less than 50ms has passed since the previous one
         if (elapsed > 50 && !isScrolling) {
           if (event.originalEvent.detail > 0 || event.originalEvent.wheelDelta < 0) {
             next();
@@ -153,7 +122,6 @@ var SCENE = (function () {
         return false;
       }
 
-      // keyboard
       function onKeyDown (event) {
         if (!isScrolling && isActive) {
           var keyCode = event.keyCode;
@@ -166,17 +134,10 @@ var SCENE = (function () {
         }
       }
 
-      // bind events
       $viewport.on('DOMMouseScroll mousewheel', onScroll);
       jQuery(document).on('keydown', onKeyDown);
     }
 
-    /**
-     * Setup SCENE
-     *
-     * @method setup
-     * @return {SCENE}
-     */
     function setup () {
       if (!$viewport) {
         console.warn('set viewport first');
@@ -185,7 +146,6 @@ var SCENE = (function () {
 
       resolution = parameters.quality;
 
-      // renderer
       renderer = new THREE.WebGLRenderer({
         alpha: false,
         antialias: false
@@ -196,16 +156,13 @@ var SCENE = (function () {
       renderer.setSize(width * resolution, height * resolution);
       $viewport.append(renderer.domElement);
 
-      // scene
       scene = new THREE.Scene();
       scene.fog = new THREE.FogExp2(parameters.fogColor, 0.01);
 
-      // light
       light = new THREE.DirectionalLight('#ffffff', 0.5);
       light.position.set(0.2, 1, 0.5);
       scene.add(light);
 
-      // camera
       camera = new THREE.PerspectiveCamera(20, width / height, 1, 4000);
       camera.position.set(0, 0, 40);
 
@@ -213,7 +170,6 @@ var SCENE = (function () {
         mouseX = (event.clientX / window.innerWidth) * 2 - 1;
       }
 
-      // binds events
       jQuery(window).on('resize', onResize);
       $viewport.on('mousemove', onMouseMove);
 
@@ -223,11 +179,6 @@ var SCENE = (function () {
       return SCENE.getInstance();
     }
 
-    /**
-     * Setup SCENE background
-     *
-     * @method setupBackground
-     */
     function setupBackground () {
       // add background particles and lines
       // rangeY based on the size and the number of sections
@@ -243,22 +194,12 @@ var SCENE = (function () {
       scene.add(backgroundLines.el);
     }
 
-    /**
-     * Drawing loop
-     *
-     * @method draw
-     */
     function draw () {
       SPRITE3D.update();
       render();
       frameId = window.requestAnimationFrame(draw);
     }
 
-    /**
-     * Render 3D Scene
-     *
-     * @method render
-     */
     function render () {
       // camera noise
       camera.position.y += Math.cos(cameraShakeY) / 50;
@@ -270,11 +211,6 @@ var SCENE = (function () {
       renderer.render(scene, camera);
     }
 
-    /**
-     * Update 3D Scene on window's resize
-     *
-     * @method onResize
-     */
     function onResize () {
       width = $viewport.width();
       height = $viewport.height();
@@ -285,12 +221,6 @@ var SCENE = (function () {
       renderer.setSize(width * resolution, height * resolution);
     }
 
-    /**
-     * Update camera position
-     *
-     * @method animateCamera
-     * @param {Number} [index]
-     */
     function animateCamera (index) {
       // in case goTo is called
       // otherwise navigation set currentIndex
@@ -335,10 +265,8 @@ var SCENE = (function () {
         bezier: { type: 'soft', values: [{ speed: 10 }, { speed: 0 }] },
         onUpdate: function () {
           backgroundLines.updateY(this.target.speed);
-          // camera.rotation.x = way * (this.target.speed / 30);
         }
       });
-
     }
 
     return {
@@ -346,7 +274,7 @@ var SCENE = (function () {
        * Set the SCENE viewport
        *
        * @method setViewport
-       * @param {jQuery Object} DOM element
+       * @param {jQuery} [$el] $viewport DOM element
        */
       setViewport: function ($el) {
         $viewport = $el;
@@ -362,7 +290,6 @@ var SCENE = (function () {
        *
        * @method config
        * @param {Object} [options]
-       * @param {Boolean} [options.stats=false] Stats?
        * @param {String} [options.fogColor='#0a0a0a'] Fog color
        * @param {Number} [options.quality=1] Quality
        * @param {Number} [options.sectionHeight=50] Height of each section
@@ -376,7 +303,7 @@ var SCENE = (function () {
        * Add sections
        *
        * @method addSections
-       * @param {Array} [sections]
+       * @param {Array} [sections] Array of Sections
        */
       addSections: function (_sections) {
         sections = _sections;
@@ -409,7 +336,7 @@ var SCENE = (function () {
        * Animate camera to section
        *
        * @method goTo
-       * @param {Number} [index]
+       * @param {Number} [index] Section's index
        */
       goTo: function (index) {
         if (index === currentIndex) {
@@ -527,9 +454,7 @@ var SCENE = (function () {
           }
         });
       }
-
     };
-
   }
 
   return {
@@ -547,7 +472,6 @@ var SCENE = (function () {
       return instance;
     }
   };
-
 })();
 
 module.exports = SCENE.getInstance();
