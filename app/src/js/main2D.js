@@ -17,6 +17,16 @@ var Help = require('./objects2D/HelpObject2D');
 var Menu = require('./objects2D/menuObject2D');
 var Wireframe = require('./objects2D/WireframeObject2D');
 
+function mobile () {
+  return navigator.userAgent.match(/Android/i)
+    || navigator.userAgent.match(/webOS/i)
+    || navigator.userAgent.match(/iPhone/i)
+    || navigator.userAgent.match(/iPad/i)
+    || navigator.userAgent.match(/iPod/i)
+    || navigator.userAgent.match(/BlackBerry/i)
+    || navigator.userAgent.match(/Windows Phone/i);
+}
+
 jQuery(function () {
   HASH.replacePlaceholders();
 
@@ -39,43 +49,50 @@ jQuery(function () {
   imagesLoader.start();
 
   // heads
-  skrollr.init();
+  skrollr.init({ skrollrBody: 'mobile-body' });
 
   // tails
   var wireframe = new Wireframe($('.wireframe'));
 
-  var $tails = jQuery('.tails');
-  var $tailsSections = $tails.find('.tails__section');
+  if (!mobile()) {
+    var $tails = jQuery('.tails');
+    var $tailsSections = $tails.find('.tails__section');
 
-  var waypoint = $tailsSections.waypoint({
-    offset: 30,
-    startAt: $tails.offset().top - 1000
-  });
+    // prepare els
+    $tailsSections.find('.tails__section__el').animate({ opacity: 0, y: 100 }, 0);
 
-  waypoint.start();
-
-  $tailsSections.on('active', function () {
-    var $el = jQuery(this);
-    
-    if ($el.attr('data-appeared')) {
-      return false;
-    }
-
-    jQuery(this).find('.tails__section__el').each(function (i) {
-      jQuery(this).stop().delay(i * 100).animate({ opacity: 1, y: 0 }, 500);
+    var waypoint = $tailsSections.waypoint({
+      offset: 30,
+      startAt: $tails.offset().top - 1000
     });
 
-    $el.attr('data-appeared', true);
-  });
+    waypoint.start();
 
-  jQuery('.tails__section--site').on('stateChange', function (e, state) {
-    if (state === 'active') {
-      wireframe.start();
-      wireframe.in();
-    } else {
-      wireframe.stop();
-    }
-  });
+    $tailsSections.on('active', function () {
+      var $el = jQuery(this);
+      
+      if ($el.attr('data-appeared')) {
+        return false;
+      }
+
+      jQuery(this).find('.tails__section__el').each(function (i) {
+        jQuery(this).stop().delay(i * 100).animate({ opacity: 1, y: 0 }, 500);
+      });
+
+      $el.attr('data-appeared', true);
+    });
+
+    jQuery('.tails__section--site').on('stateChange', function (e, state) {
+      if (state === 'active') {
+        wireframe.start();
+        wireframe.in();
+      } else {
+        wireframe.stop();
+      }
+    });
+  } else {
+    wireframe.in();
+  }
 
   imagesLoader.onComplete(function () {
     loader.out();
