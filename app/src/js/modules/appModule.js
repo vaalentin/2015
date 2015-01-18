@@ -84,7 +84,7 @@ var APP = (function () {
         } else {
           to = 'tails';
           y = 0;
-          $infoArrow.stop().animate({ opacity: 0.2, bottom: 0 }, 500);
+          $infoArrow.stop().animate({ opacity: 0.5, bottom: 0 }, 500);
         }
 
         var props = { y: y + '%' };
@@ -113,7 +113,7 @@ var APP = (function () {
           durations = [1050, 1000];
           events.trigger('heads:visible');
           $infoHeads.animate({ opacity: 0 }, 800);
-          $infoArrow.stop().animate({ opacity: 0.2, bottom: 0 }, 500);
+          $infoArrow.stop().animate({ opacity: 0.5, bottom: 0 }, 500);
         } else {
           to = 'tails';
           y = -100;
