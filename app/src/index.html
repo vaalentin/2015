@@ -35,12 +35,12 @@
     (function () {
 
       // disable console
-      if (!window.console) window.console = {};
+      // if (!window.console) window.console = {};
 
-      var methods = ['log', 'debug', 'warn', 'info'];
-      for (var i = 0; i < methods.length; i++){
-        console[methods[i]] = function () {};
-      }
+      // var methods = ['log', 'debug', 'warn', 'info'];
+      // for (var i = 0; i < methods.length; i++){
+      //   console[methods[i]] = function () {};
+      // }
 
       // features
       function mobile () {
@@ -476,12 +476,14 @@
             <p>
               ES5 / ES6 <br>
               Node.js <br>
-              Coffeescript
+              Coffeescript <br>
+              Typescript
             </p>
             <p> 
               <span> Make life easier: </span> jQuery, Zepto, underscore.js <br>
               <span> WebGL: </span> Three.js <br>
               <span> Canvas: </span> paper.js, D3.js <br>
+              <span> Animation: </span> TweenLite / TweenMax, Velocity.js </br>
               <span> MV* Frameworks: </span> Backbone.js, AngularJS, React <br>
               <span> Package manager: </span> Npm, Bower <br>
               <span> Dependencies injection: </span> AMD (requirejs), CommonJS (browserify) <br>
@@ -498,7 +500,8 @@
           <h2 class="tails__section__el"> HTML / CSS </h2>
           <div class="tails__section__el">
               <p>
-              HTML5 / CSS3
+              HTML5 / CSS3 <br>
+              SVG
             </p>
             <p>
               Preprocessors: LESS, SASS <br>
