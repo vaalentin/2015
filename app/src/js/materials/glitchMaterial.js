@@ -17,10 +17,6 @@ var glitch = new THREE.ShaderMaterial({
   ].join('\n'),
   fragmentShader: [
 
-    '#ifdef GL_ES',
-    'precision mediump float;',
-    '#endif',
-
     'float time;',
     'uniform vec2 resolution;',
     'vec2 fInverseViewportDimensions;',
