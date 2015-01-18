@@ -128,7 +128,7 @@ function Grid (options) {
   };
 
   this.out = function (way) {
-    var y = way === 'up' ? -10 : 10;
+    var y = way === 'up' ? -50 : 50;
     TweenLite.to(group.position, 1, { y: y });
   };
 }
