@@ -22,7 +22,9 @@ function BackgroundParticles (options) {
   var parameters = jQuery.extend({
     count: 1000,
     particleSize: 0.5,
-    rangeY: [-100, 100]
+    rangeY: [-100, 100],
+    strips: true,
+    stripsCount: 20
   }, options);
 
   var material = new THREE.PointCloudMaterial({
@@ -51,7 +53,7 @@ function BackgroundParticles (options) {
     var stripGeometry = new THREE.PlaneGeometry(5, 2);
     var stripMaterial = new THREE.MeshLambertMaterial({ color: '#666666' });
 
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < parameters.stripsCount; i++) {
       var stripMesh = new THREE.Mesh(stripGeometry, stripMaterial);
       stripMesh.position.set(
         random(-50, 50),
