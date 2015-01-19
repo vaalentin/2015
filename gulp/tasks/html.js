@@ -18,7 +18,8 @@ gulp.task('html', function () {
       collapseWhitespace: true,
       removeComments: true,
       minifyJS: true,
-      minifyCSS: true
+      minifyCSS: true,
+      keepClosingSlash: true
     }))
     .pipe(gulp.dest('./'))
     .pipe(notify({ title: 'Html', message: 'Success', sound: 'Morse' }));
