@@ -138,13 +138,13 @@ function Ball () {
 
   this.start = function () {
     idleTweens.rotate.resume();
-    idleTweens.glitch.resume();
+    // idleTweens.glitch.resume();
     idleTweens.blink.resume();
   };
 
   this.stop = function () {
     idleTweens.rotate.pause();
-    idleTweens.glitch.pause();
+    // idleTweens.glitch.pause();
     idleTweens.blink.pause();
   };
 }
