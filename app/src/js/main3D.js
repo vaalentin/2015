@@ -393,6 +393,7 @@ jQuery(function () {
   var wireframe = new Wireframe(jQuery('.wireframe'));
 
   var $tailsSections = jQuery('.tails__section');
+  $tailsSections.find('.tails__section__el').animate({ opacity: 0, y: 100 }, 0);
 
   var waypoint = $tailsSections.waypoint({
     $viewport: jQuery('.tails'),
