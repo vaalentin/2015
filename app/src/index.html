@@ -72,10 +72,9 @@
       cssPayload.rel = 'stylesheet';
       cssPayload.type = 'text/css';
 
-      var vendorPayload = document.createElement('script');
-      var mainPayload = document.createElement('script');
-      vendorPayload.type = mainPayload.type = 'text/javascript';
-      vendorPayload.async = vendorPayload.defer = mainPayload.async = mainPayload.defer = false;
+      var jsPayload = document.createElement('script');
+      jsPayload.type = 'text/javascript';
+      jsPayload.async = jsPayload.defer = false;
 
       var prefix;
       if (webGL() && !mobile()) {
@@ -85,14 +84,12 @@
       }
 
       cssPayload.href = './app/dist/css/' + prefix + '/main.css';
-      vendorPayload.src = './app/dist/js/' + prefix + '/vendor.js';
-      mainPayload.src = './app/dist/js/' + prefix + '/main.js';
+      jsPayload.src = './app/dist/js/' + prefix + '/bundle.js';
 
       var head = document.getElementsByTagName('head')[0];
 
       head.appendChild(cssPayload);
-      head.appendChild(vendorPayload);
-      head.appendChild(mainPayload);
+      head.appendChild(jsPayload);
     })();
   </script>
 
