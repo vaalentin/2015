@@ -15,9 +15,8 @@ var HASH = HASH || (function () {
   function init () {
     var agencies = {
       akqa: 'AKQA',
-      eli: 'Eli',
       hki: 'HKI',
-      malguy: 'Malguy',
+      grouek: 'Grouek',
       mediamonks: 'Media Monks',
       soleilnoir: 'Soleil Noir',
       thread: 'Thread',

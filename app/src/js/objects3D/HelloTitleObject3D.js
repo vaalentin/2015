@@ -18,9 +18,8 @@ function Title () {
 
   var sprites = {
     akqa: './app/public/img/sprite-AKQA.png',
-    eli: './app/public/img/sprite-eli.png',
     hki: './app/public/img/sprite-HKI.png',
-    malguy: './app/public/img/sprite-malguy.png',
+    grouek: './app/public/img/sprite-grouek.png',
     mediamonks: './app/public/img/sprite-mediamonks.png',
     none: './app/public/img/sprite-none.png',
     soleilnoir: './app/public/img/sprite-soleilnoir.png',
