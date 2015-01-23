@@ -30,17 +30,15 @@ function Slider ($el) {
   this.onResize = null;
 
   // init slides and map
-  var _this = this;
-
   var $node = jQuery('<div class="slider__map__node">');
   this.$nodes = jQuery();
 
-  this.$slides.each(function (index) {
-    var $slide = jQuery(this);
+  this.$slides.each(function (index, el) {
+    var $slide = jQuery(el);
     
     $slide.css({
-      width: _this.slideWidth + '%',
-      left: (index * _this.slideWidth) + '%'
+      width: this.slideWidth + '%',
+      left: (index * this.slideWidth) + '%'
     });
 
     var $nodeCopy = $node.clone();
@@ -51,8 +49,8 @@ function Slider ($el) {
       $nodeCopy.addClass('is-active');
     }
 
-    _this.$nodes = _this.$nodes.add($nodeCopy);
-  });
+    this.$nodes = this.$nodes.add($nodeCopy);
+  }.bind(this));
 
   this.$map.html(this.$nodes);
 
@@ -140,18 +138,18 @@ Slider.prototype.updateMap = function (index) {
  * @method start
  */
 Slider.prototype.start = function () {
-  this.$nodes.on('click', function () {
-    var index = jQuery(this).index();
-    _this.goTo(index);
-  });
-
-  var _this = this;
+  this.$nodes.on('click', function (e) {
+    var index = jQuery(e.currentTarget).index();
+    this.goTo(index);
+  }.bind(this));
 
   // autoplay with pause on hover
   this.interval = window.setInterval(function () {
-    _this.next();
-  }, 10000);
+    this.next();
+  }.bind(this), 10000);
 
+  var _this = this;
+  
   this.$el.on({
     mouseenter: function () {
       window.clearInterval(_this.interval);

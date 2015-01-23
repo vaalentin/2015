@@ -7,6 +7,8 @@
  * @method loop
  */
 function loop () {
+  /*jshint validthis: true */
+  
   this.restart();
 }
 

@@ -10,7 +10,7 @@ var SOUNDS = require('../modules/soundsModule');
 
 var Events = require('../classes/EventsClass');
 
-var Map = require('../objects2D/MapObject2D');
+var MapObj = require('../objects2D/MapObject2D');
 
 var BackgroundParticles = require('../objects3D/BackgroundParticlesObject3D');
 var BackgroundLines = require('../objects3D/BackgroundLinesObject3D');
@@ -21,7 +21,7 @@ var BackgroundLines = require('../objects3D/BackgroundLinesObject3D');
  * @module SCENE
  * @event [section:changeBegin]
  * @event [section:changeComplete]
- * @requires jQuery, THREE, TweenLite, SPRITE3D, SOUNDS, Events, Map, BackgroundParticles, BackgroundLines
+ * @requires jQuery, THREE, TweenLite, SPRITE3D, SOUNDS, Events, MapObj, BackgroundParticles, BackgroundLines
  */
 var SCENE = (function () {
   var instance;
@@ -57,7 +57,6 @@ var SCENE = (function () {
     var isStarted = false;
 
     // camera
-    var cameraTween;
     var cameraCache = { speed: 0 };
     var isScrolling = false;
 
@@ -354,7 +353,7 @@ var SCENE = (function () {
        */
       getMap: function () {
 
-        var map = new Map();
+        var map = new MapObj();
 
         for (var i = 0, j = sections.length; i < j; i++) {
           map.addNode(i);
@@ -417,6 +416,16 @@ var SCENE = (function () {
       quality: function (value) {
         resolution = value;
         renderer.setSize(width * resolution, height * resolution);
+      },
+
+      /**
+       * Return current scene quality
+       *
+       * @method getQuality
+       * @return {Number}
+       */
+      getQuality: function () {
+        return resolution;
       },
 
       /**

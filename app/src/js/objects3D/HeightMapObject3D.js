@@ -1,4 +1,5 @@
 /* jshint laxbreak: true */
+/* jshint shadow:true */
 
 'use strict';
 
@@ -212,8 +213,6 @@ HeightMap.prototype.getIdleTween = function () {
  * @method loadMaps
  */
 HeightMap.prototype.loadMaps = function () {
-  var _this = this;
-
   var totalData = (this.parameters.divisionsX + 1) * (this.parameters.divisionsY + 1);
   this.data = { default: new Float32Array(totalData) };
   
@@ -221,7 +220,7 @@ HeightMap.prototype.loadMaps = function () {
   var total = this.parameters.maps.length;
   var loaded = 0;
 
-  function addMap (name, image) {
+  var addMap = function (name, image) {
     var width = image.width;
     var height = image.height;
 
@@ -233,8 +232,8 @@ HeightMap.prototype.loadMaps = function () {
 
     context.drawImage(image, 0, 0);
 
-    var stepX = width / _this.parameters.divisionsX;
-    var stepY = height / _this.parameters.divisionsY;
+    var stepX = width / this.parameters.divisionsX;
+    var stepY = height / this.parameters.divisionsY;
 
     var data = new Float32Array(totalData);
     var i = 0;
@@ -251,8 +250,10 @@ HeightMap.prototype.loadMaps = function () {
     }
 
     _this.data[name] = data;
-  }
+  }.bind(this);
 
+  var _this = this;
+  
   function loadMap (map, index) {
     loader.load(map.url, function (image) {
       addMap(map.name, image);

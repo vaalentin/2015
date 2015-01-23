@@ -74,8 +74,6 @@ function Drop (options) {
       idleTweens[i].pause();
     }
   };
-
-  delete this.parameters;
 }
 
 /**

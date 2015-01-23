@@ -87,8 +87,6 @@ function FlowField (points, options) {
       follow.tweens[i].pause();
     }
   };
-
-  delete this.parameters;
 }
 
 /**

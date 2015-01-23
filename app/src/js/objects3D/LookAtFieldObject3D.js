@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
   
 var jQuery = require('jquery');
 var THREE = require('three');
@@ -60,12 +60,12 @@ function LookAtField (options) {
     group.visible = true;
     TweenLite.to(center, 2, { y: 0, onUpdate: update });
     TweenLite.to(group.position, 1, { y: 0 });
-  }
+  };
 
-  this.out = function (way) {
+  this.out = function () {
     TweenLite.to(center, 1, { y: 50, onUpdate: update, onComplete: function () { group.visible = false; } });
     TweenLite.to(group.position, 1, { y: -50 });
-  }
+  };
 }
 
 module.exports = LookAtField;

@@ -41,7 +41,6 @@ function TextPanel (text, options) {
   var canvas = document.createElement('canvas');
   var context = canvas.getContext('2d');
 
-  // build and assing font's string
   var font = parameters.style + ' ' + parameters.size + 'px' + ' ' + parameters.font;
 
   context.font = font;

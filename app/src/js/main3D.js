@@ -41,7 +41,7 @@ jQuery(function () {
 
   var loader = new Loader();
   var help = new Help();
-  var menu = Menu();
+  var menu = new Menu();
   var imagesLoader = new ImagesLoader([
     './app/public/img/texture-ball.png',
     './app/public/img/texture-ballAlpha.png',
@@ -73,12 +73,24 @@ jQuery(function () {
     if (name === 'sounds') {
       SOUNDS.toggle();
       $el.html(SOUNDS.isMuted() ? 'UNMUTE' : 'MUTE');
-    } else if (name === 'help') {
+    }
+    else if (name === 'help') {
       help.in();
-    } else if (name === 'quality') {
-      var text = $el.html();
-      $el.html(text === 'QUALITY 0.5' ? 'QUALITY 1' : 'QUALITY 0.5');
-      SCENE.quality(text === 'QUALITY 0.5' ? 0.5 : 1);
+    }
+    else if (name === 'quality') {
+      var text;
+      var quality;
+
+      if (SCENE.getQuality() === 0.5) {
+        text = 'QUALITY 1';
+        quality = 1;
+      } else {
+        text = 'QUALITY 0.5';
+        quality = 0.5;
+      }
+
+      $el.html(text);
+      SCENE.quality(quality);
     }
   });  
     
@@ -244,7 +256,6 @@ jQuery(function () {
   });
 
   SCENE.on('section:changeComplete', function () {
-    var way = this.way;
     var to = this.to.name;
     var from = this.from.name;
 
@@ -424,10 +435,9 @@ jQuery(function () {
   });
 
   APP.on('slideBegin', function () {
-    var to = this.to;
-
-    if (to === 'heads') {
+    if (this.to === 'heads') {
       waypoint.stop();
+
       try {
         SOUNDS.background.fadeIn(1, 2000);  
       } catch (e) {
@@ -440,9 +450,7 @@ jQuery(function () {
   });
 
   APP.on('slideComplete', function () {
-    var to = this.to;
-
-    if (to === 'tails') {
+    if (this.to === 'tails') {
       waypoint.start();
     }
   });

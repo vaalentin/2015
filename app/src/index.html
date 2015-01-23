@@ -37,13 +37,13 @@
     (function () {
 
       // disable console
-      console.log('That\'s probably what you\'re looking for! https://github.com/vaalentin/2015');
+      // console.log('That\'s probably what you\'re looking for! https://github.com/vaalentin/2015');
 
-      if (!window.console) window.console = {};
-      var methods = ['log', 'debug', 'warn', 'info'];
-      for (var i = 0; i < methods.length; i++){
-        console[methods[i]] = function () {};
-      }
+      // if (!window.console) window.console = {};
+      // var methods = ['log', 'debug', 'warn', 'info'];
+      // for (var i = 0; i < methods.length; i++){
+      //   console[methods[i]] = function () {};
+      // }
 
       // features
       function mobile () {
@@ -76,6 +76,10 @@
       jsPayload.type = 'text/javascript';
       jsPayload.async = jsPayload.defer = false;
 
+      var jsPayload2 = document.createElement('script');
+      jsPayload2.type = 'text/javascript';
+      jsPayload2.async = jsPayload2.defer = false;
+
       var prefix;
       if (webGL() && !mobile()) {
         prefix = '3D';
@@ -84,12 +88,14 @@
       }
 
       cssPayload.href = './app/dist/css/' + prefix + '/main.css';
-      jsPayload.src = './app/dist/js/' + prefix + '/bundle.js';
+      jsPayload.src = './app/dist/js/' + prefix + '/vendor.js';
+      jsPayload2.src = './app/dist/js/' + prefix + '/main.js';
 
       var head = document.getElementsByTagName('head')[0];
 
       head.appendChild(cssPayload);
       head.appendChild(jsPayload);
+      head.appendChild(jsPayload2);
     })();
   </script>
 
@@ -470,59 +476,51 @@
 
       <div class="tails__section tails__section--skills">
         <h1 class="tails__section__el"> MY SKILLS </h1>
-        <!-- <div class="tails__column tails__column--left"> -->
-          <!-- <div class="tails__column__container tails__column__container--left"> -->
-            <h2 class="tails__section__el"> Javascript </h2>
-            <div class="tails__section__el">
-              <p>
-                ES5 / ES6 <br>
-                Node.js <br>
-                Coffeescript <br>
-                Typescript
-              </p>
-              <p> 
-                <span> Make life easier: </span> jQuery, Zepto, underscore.js <br>
-                <span> WebGL: </span> Three.js <br>
-                <span> Canvas: </span> paper.js, D3.js <br>
-                <span> Animation: </span> TweenLite / TweenMax, Velocity.js <br>
-                <span> MV* Frameworks: </span> Backbone.js, AngularJS, React <br>
-                <span> Package manager: </span> Npm, Bower <br>
-                <span> Dependencies injection: </span> AMD (requirejs), CommonJS (browserify) <br>
-                <span> build tools: </span> Grunt, Gulp, Make <br>
-                <span> features detection: </span> Modernizr <br>
-                <span> Tests: </span> Jasmine, PhantomJS
-              </p>
-            </div>
-          <!-- </div> -->
-        <!-- </div> -->
+        <h2 class="tails__section__el"> Javascript </h2>
+        <div class="tails__section__el">
+          <p>
+            ES5 / ES6 <br>
+            Node.js <br>
+            Coffeescript <br>
+            Typescript
+          </p>
+          <p> 
+            <span> Make life easier: </span> jQuery, Zepto, underscore.js <br>
+            <span> WebGL: </span> Three.js <br>
+            <span> Canvas: </span> paper.js, D3.js <br>
+            <span> Animation: </span> TweenLite / TweenMax, Velocity.js <br>
+            <span> MV* Frameworks: </span> Backbone.js, AngularJS, React <br>
+            <span> Package manager: </span> Npm, Bower <br>
+            <span> Dependencies injection: </span> AMD (requirejs), CommonJS (browserify) <br>
+            <span> build tools: </span> Grunt, Gulp, Make <br>
+            <span> features detection: </span> Modernizr <br>
+            <span> Tests: </span> Jasmine, PhantomJS
+          </p>
+        </div>
 
-        <!-- <div class="tails__column tails__column--right"> -->
-          <!-- <div class="tails__column__container tails__column__container--right"> -->
-            <h2 class="tails__section__el"> HTML / CSS </h2>
-            <div class="tails__section__el">
-                <p>
-                HTML5 / CSS3 <br>
-                SVG
-              </p>
-              <p>
-                Preprocessors: LESS, SASS <br>
-                Modular: SMACSS, BEM
-              </p>
-            </div>
-            <h2 class="tails__section__el"> Misc </h2>
-            <div class="tails__section__el">
-              <p>
-                PHP: Cake PHP, Wordpress <br>
-                Pyhton &amp; Ruby <br>
-                Version control: Git, SVN <br>
-                I care about the elders: Polyfills and fallbacks for older browsers <br>
-                Design patterns: MV*, Pubsub, Modules, Singleton, Decorator, ... <br>
-                Adobe creative suite: Photoshop, Illustrator, InDesign, ... <br>
-                3D: Maya
-              </p>
-            </div>
-          <!-- </div> -->
-        <!-- </div> -->
+        <h2 class="tails__section__el"> HTML / CSS </h2>
+        <div class="tails__section__el">
+            <p>
+            HTML5 / CSS3 <br>
+            SVG
+          </p>
+          <p>
+            Preprocessors: LESS, SASS <br>
+            Modular: SMACSS, BEM
+          </p>
+        </div>
+        <h2 class="tails__section__el"> Misc </h2>
+        <div class="tails__section__el">
+          <p>
+            PHP: Cake PHP, Wordpress <br>
+            Pyhton &amp; Ruby <br>
+            Version control: Git, SVN <br>
+            I care about the elders: Polyfills and fallbacks for older browsers <br>
+            Design patterns: MV*, Pubsub, Modules, Singleton, Decorator, ... <br>
+            Adobe creative suite: Photoshop, Illustrator, InDesign, ... <br>
+            3D: Maya
+          </p>
+        </div>
       </div>
     </div>
 

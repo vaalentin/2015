@@ -2,7 +2,7 @@
 
 var jQuery = require('jquery');
 var THREE = require('three');
-var TweenLite = require('tweenlite')
+var TweenLite = require('tweenlite');
 
 var SOUNDS = require('../modules/soundsModule');
 var random = require('../utils/randomUtil');

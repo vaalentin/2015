@@ -22,20 +22,18 @@ function ImagesLoader (images) {
  * @method start
  */
 ImagesLoader.prototype.start = function () {
-  var _this = this;
-
   var loaded = 0;
 
-  function updateQueue () {
+  var updateQueue = function () {
     loaded++;
 
-    var percent = (loaded * 100) / _this.total;
-    _this.progress(percent);
+    var percent = (loaded * 100) / this.total;
+    this.progress(percent);
 
-    if (loaded === _this.total) {
-      _this.complete();
+    if (loaded === this.total) {
+      this.complete();
     }
-  }
+  }.bind(this);
 
   for (var i = 0; i < this.total; i++) {
     var image = new Image();

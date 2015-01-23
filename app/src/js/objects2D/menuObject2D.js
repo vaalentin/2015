@@ -14,7 +14,6 @@ function Menu () {
   var $button = $el.find('.menu__button');
   var $itemsContainer = $el.find('.menu__items');
   var $items = $el.find('.menu__item');
-  var total = $items.length - 1;
 
   var _callback = function () {};
   var timeouts = [];

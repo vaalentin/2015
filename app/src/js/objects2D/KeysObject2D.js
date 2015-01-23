@@ -1,7 +1,5 @@
 'use strict';
 
-var jQuery = require('jquery');
-
 /**
  * Animated keyboard keys
  *
@@ -43,11 +41,9 @@ Keys.prototype.highlight = function () {
  * @method start
  */
 Keys.prototype.start = function () {
-  var _this = this;
-
   this.interval = window.setInterval(function () {
-    _this.highlight();
-  }, 1000);
+    this.highlight();
+  }.bind(this), 1000);
 };
 
 /**

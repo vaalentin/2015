@@ -1,9 +1,10 @@
+/* jshint shadow: true */
+
 'use strict';
 
 var jQuery = require('jquery');
 var THREE = require('three');
 
-var loop = require('../utils/loopUtil');
 var random = require('../utils/randomUtil');
 
 /**
@@ -16,7 +17,7 @@ var random = require('../utils/randomUtil');
  * @param {Number} [options.count=1000] Number of particles
  * @param {Number} [options.particleSize=0.5] Size of a particle
  * @param {Array} [options.rangeY=[-100, 100]] Y range for positions
- * @requires jQuery, THREE, loop, random
+ * @requires jQuery, THREE, random
  */
 function BackgroundParticles (options) {
   var parameters = jQuery.extend({

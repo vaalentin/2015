@@ -3,7 +3,6 @@
 var THREE = require('three');
 var TweenLite = require('tweenlite');
 
-var random = require('../utils/randomUtil');
 var yoyo = require('../utils/yoyoUtil');
 
 var matCap = require('../materials/matCapMaterial');
@@ -37,20 +36,20 @@ function Face () {
 
     this.in = function () {
       TweenLite.to(mesh.rotation, 1.5, { x: 0 });
-    }
+    };
 
     this.out = function (way) {
       var x = way === 'up' ? -1 : 1;
       TweenLite.to(mesh.rotation, 1.5, { x: x });
-    }
+    };
 
     this.start = function () {
       idleTween.resume();
-    }
+    };
 
     this.stop = function () {
       idleTween.pause();
-    }
+    };
   }.bind(this));
 
   this.el = group;

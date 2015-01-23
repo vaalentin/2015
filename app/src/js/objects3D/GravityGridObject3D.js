@@ -26,7 +26,8 @@ function Grid (options) {
     stepsY: 10,
     stepSize: 2,
     linesFromColor: '#ffffff',
-    linesToColor: '#333333'
+    linesToColor: '#333333',
+    points: false
   }, options);
 
   this.lines = null;
@@ -87,7 +88,9 @@ Grid.prototype.render = function () {
   });
   var pointCloud = new THREE.PointCloud(this.points, pointCloudMaterial);
 
-  // group.add(pointCloud);
+  if (this.parameters.points) {
+    group.add(pointCloud);
+  }
 
   // lines
   var lines = new THREE.Object3D();
@@ -215,7 +218,7 @@ function GravityGrid (options) {
   var grid = new Grid({
     stepsX: 30,
     stepsY: 30,
-    linesColor: options.linesColor
+    linesColor: options.linesColor || '#666666'
   });
   group.add(grid.el);
 

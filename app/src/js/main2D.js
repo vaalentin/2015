@@ -1,3 +1,5 @@
+/* jshint laxbreak: true */
+
 'use strict';
 
 require('./polyfills/animFramePolyfill');
@@ -13,7 +15,6 @@ var HASH = require('./modules/hashModule');
 var ImagesLoader = require('./classes/LoaderClass');
 
 var Loader = require('./objects2D/LoaderObject2D');
-var Help = require('./objects2D/HelpObject2D');
 var Menu = require('./objects2D/menuObject2D');
 var Wireframe = require('./objects2D/WireframeObject2D');
 
@@ -31,8 +32,7 @@ jQuery(function () {
   HASH.replacePlaceholders();
 
   var loader = new Loader();
-  var help = new Help();
-  var menu = Menu();
+  var menu = new Menu();
   var imagesLoader = new ImagesLoader([
     './app/public/img/part-beam.png',
     './app/public/img/part-drop.png',
@@ -52,7 +52,7 @@ jQuery(function () {
   skrollr.init({ skrollrBody: 'mobile-body' });
 
   // tails
-  var wireframe = new Wireframe($('.wireframe'));
+  var wireframe = new Wireframe(jQuery('.wireframe'));
 
   if (!mobile()) {
     var $tails = jQuery('.tails');

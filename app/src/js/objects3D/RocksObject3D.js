@@ -31,8 +31,6 @@ function Rocks () {
   var fromColor = new THREE.Color('#0a0a0a');
   var toColor = new THREE.Color('#ffffff');
 
-  var _this = this;
-
   var loader = new THREE.JSONLoader();
   loader.load('./app/public/3D/rocks.js', function (geometry) {
     var rocks = new THREE.Mesh(geometry, rocksMaterial);
@@ -51,11 +49,11 @@ function Rocks () {
       sphere.material.color = fromColor.clone().lerp(toColor, cache.color);
     }
 
-    _this.in = function () {
+    this.in = function () {
       TweenLite.to(cache, 1, { angle: 0.3, y: 20, intensity: 15, color: 1, onUpdate: update });
     };
 
-    _this.out = function (way) {
+    this.out = function (way) {
       var y = way === 'up' ? 11 : 20;
       TweenLite.to(cache, 1, { angle: 0, y: y, intensity: 0, color: 0, onUpdate: update });
     };
@@ -69,15 +67,15 @@ function Rocks () {
       onReverseComplete: yoyo
     });
 
-    _this.start = function () {
+    this.start = function () {
       idleTween.resume();
-    }
+    };
 
-    _this.stop = function () {
+    this.stop = function () {
       idleTween.pause();
-    }
+    };
 
-  });
+  }.bind(this));
 
   this.el = group;
 

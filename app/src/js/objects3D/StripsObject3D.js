@@ -71,6 +71,8 @@ function Strip (options) {
   var cache = { x: from };
 
   function update () {
+    /*jshint validthis: true */
+    
     geometry.vertices[1].x = geometry.vertices[3].x = this.target.x;
 
     geometry.verticesNeedUpdate = true;

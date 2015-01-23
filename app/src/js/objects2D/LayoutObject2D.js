@@ -1,7 +1,5 @@
 'use strict';
 
-var jQuery = require('jquery');
-
 /**
  * Animated layout
  *
@@ -41,13 +39,19 @@ Layout.prototype.slide = function () {
     this.mouseY = 3;
   }
 
-  var _this = this;
+  var open = function () {
+    this.$container.animate({
+      'top': this.openY + '%'
+    }, 800, function () {
+      click();
+    });
+  }.bind(this);
 
-  function moveMouse () {
+  var moveMouse = function () {
     var flag = false;
 
-    _this.$mouse.animate({
-      'top': _this.mouseY + '%'
+    this.$mouse.animate({
+      'top': this.mouseY + '%'
     }, {
       duration: 500,
       progress: function (animation, progress) {
@@ -57,20 +61,12 @@ Layout.prototype.slide = function () {
         }
       }
     });
-  }
+  }.bind(this);
 
-  function open () {
-    _this.$container.animate({
-      'top': _this.openY + '%'
-    }, 800, function () {
-      click();
-    });
-  }
-
-  function click () {
+  var click = function () {
     var flag = false;
 
-    _this.$click.delay(500).animate({
+    this.$click.delay(500).animate({
       'width': 70,
       'height': 70,
       'margin-left': -35,
@@ -85,30 +81,30 @@ Layout.prototype.slide = function () {
         }
       },
       complete: function () {
-        _this.$click.css({
+        this.$click.css({
           'width': 0,
           'height': 0,
           'margin-left': 0,
           'margin-top': 0,
           'opacity': 1
-        });
+        }.bind(this));
       }
     });
-  }
+  }.bind(this);
 
-  function slide () {
-    _this.$container.animate({
-      'top': _this.y + '%'
+  var slide = function () {
+    this.$container.animate({
+      'top': this.y + '%'
     }, 500);
 
     centerMouse();
-  }
+  }.bind(this);
 
-  function centerMouse () {
-    _this.$mouse.delay(300).animate({
+  var centerMouse = function () {
+    this.$mouse.delay(300).animate({
       'top': '45%'
     }, 500);
-  }
+  }.bind(this);
 
   moveMouse();
 };
@@ -119,13 +115,11 @@ Layout.prototype.slide = function () {
  * @method start
  */
 Layout.prototype.start = function () {
-  var _this = this;
-
-  _this.slide();
+  this.slide();
 
   this.interval = window.setInterval(function () {
-    _this.slide();
-  }, 4000);
+    this.slide();
+  }.bind(this), 4000);
 };
 
 /**

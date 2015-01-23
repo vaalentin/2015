@@ -134,8 +134,6 @@ function Galaxy (options) {
   this.stop = function () {
     idleTween.pause();
   };
-
-  delete this.parameters;
 }
 
 /**

@@ -30,8 +30,6 @@ function Help () {
  * @method in
  */
 Help.prototype.in = function () {
-  var _this = this;
-
   this.$el.css({ display: 'block', opacity: 0 });
 
   this.slider.start();
@@ -40,20 +38,20 @@ Help.prototype.in = function () {
     .animate({ top: '50%', opacity: 1 }, 500);
 
   this.$el.stop().animate({ opacity: 0.9 }, 500, function () {
-    _this.keys.start();
-    _this.mouse.start();
-    _this.layout.start();
-  });
+    this.keys.start();
+    this.mouse.start();
+    this.layout.start();
+  }.bind(this));
 
   this.$el.on('click', function (event) {
     if (event.target === this) {
-      _this.out();
+      this.out();
     }
-  });
+  }.bind(this));
 
   this.$el.find('.help__quit').on('click', function () {
-    _this.out();
-  });
+    this.out();
+  }.bind(this));
 };
 
 /**
@@ -62,17 +60,15 @@ Help.prototype.in = function () {
  * @method out
  */
 Help.prototype.out = function () {
-  var _this = this;
-
   this.$el.stop().animate({ opacity: 0 }, 500, function () {
-    _this.$el.css('display', 'none');
+    this.$el.css('display', 'none');
 
-    _this.slider.stop();
+    this.slider.stop();
 
-    _this.keys.stop();
-    _this.mouse.stop();
-    _this.layout.stop();
-  });
+    this.keys.stop();
+    this.mouse.stop();
+    this.layout.stop();
+  }.bind(this));
 
   this.$el.off('click');
   this.$el.find('.help__quit').off('click');

@@ -21,7 +21,7 @@ var HASH = HASH || (function () {
       soleilnoir: 'Soleil Noir',
       thread: 'Thread',
       ultranoir: 'Ultra Noir'
-    }
+    };
 
     function getHash () {
       return window.location.hash.split('#')[1];
@@ -59,9 +59,9 @@ var HASH = HASH || (function () {
 
           if ($placeholder.hasClass('placeholder--agency--you')) {
             if (agency !== '') {
-              $placeholder.html(agency)
+              $placeholder.html(agency);
             } else {
-              $placeholder.html('you')
+              $placeholder.html('you');
             }
           } else {
             if ($placeholder.hasClass('placeholder--agency--capital')) {

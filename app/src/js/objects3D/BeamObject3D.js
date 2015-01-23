@@ -126,6 +126,8 @@ function Beam (options) {
   var cache = { y: (height / 2) + (width / 2) };
 
   function positionUpdate () {
+    /*jshint validthis: true */
+    
     var extremity = this.target.y - (width /2);
 
     lineGeometry.vertices[1].y = extremity;

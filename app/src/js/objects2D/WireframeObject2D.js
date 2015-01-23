@@ -41,8 +41,6 @@ function Wireframe ($el, options) {
  * @param {Boolean} [out] Out instead of in?
  */
 Wireframe.prototype.in = function (out) {
-  var _this = this;
-
   // targets
   var targetLines;
   var targetTextLines;
@@ -61,22 +59,22 @@ Wireframe.prototype.in = function (out) {
   // frames
   var totalFrames = this.$topLines.length;
 
-  function setAnimation (index) {
-    var $top = jQuery(_this.$topLines[index]);
-    var $bottom = jQuery(_this.$bottomLines[index]);
-    var $left = jQuery(_this.$leftLines[index]);
-    var $right = jQuery(_this.$rightLines[index]);
+  var setAnimation = function (index) {
+    var $top = jQuery(this.$topLines[index]);
+    var $bottom = jQuery(this.$bottomLines[index]);
+    var $left = jQuery(this.$leftLines[index]);
+    var $right = jQuery(this.$rightLines[index]);
 
     setTimeout(function () {
       $top.css('width', targetLines);
       $right.css('height', targetLines);
-    }, (index * _this.parameters.delay) + 400);
+    }, (index * this.parameters.delay) + 400);
 
     setTimeout(function () {
       $left.css('height', targetLines);
       $bottom.css('width', targetLines);
-    }, (index * _this.parameters.delay) + 600);
-  }
+    }, (index * this.parameters.delay) + 600);
+  }.bind(this);
 
   // set animations for each frame
   for (var i = 0; i < totalFrames; i++) {
@@ -84,6 +82,8 @@ Wireframe.prototype.in = function (out) {
   }
 
   // text
+  var delay = this.parameters.delay;
+
   this.$textLines.each(function (i) {
     var $line = jQuery(this);
 
@@ -92,7 +92,7 @@ Wireframe.prototype.in = function (out) {
         ? targetIncompleteTextLines
         : targetTextLines);
       
-    }, i * _this.parameters.delay);
+    }, i * delay);
   });
 
   // control nodes
@@ -101,7 +101,7 @@ Wireframe.prototype.in = function (out) {
 
     setTimeout(function () {
       $node.css('top', targetNodes);
-    }, i * _this.parameters.delay);
+    }, i * delay);
   });
 };
 
@@ -129,19 +129,15 @@ Wireframe.prototype.start = function () {
     return false;
   }
 
-  var _this = this;
-
-  function update () {
-    if (_this.currentPosition > _this.totalPositions) {
-      _this.currentPosition = 0;
+  this.interval = setInterval(function () {
+    if (this.currentPosition > this.totalPositions) {
+      this.currentPosition = 0;
     }
 
-    _this.$leftColumn.css('top', _this.parameters.positions[_this.currentPosition] + 'px');
+    this.$leftColumn.css('top', this.parameters.positions[this.currentPosition] + 'px');
 
-    _this.currentPosition++;
-  }
-
-  this.interval = setInterval(update, 2000);
+    this.currentPosition++;
+  }.bind(this), 2000);
 };
 
 /**

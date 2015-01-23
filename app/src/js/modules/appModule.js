@@ -25,7 +25,7 @@ var APP = (function () {
     var $infoHeads = $heads.find('.trigger__info--heads');
     var $infoTails = $heads.find('.trigger__info--tails');
 
-    // init scroll
+    // reset scroll
     jQuery('body').stop().animate({ scrollTop: 0 }, 2000);
 
     function navigation () {

@@ -1,7 +1,5 @@
 'use strict';
 
-var jQuery = require('jquery');
-
 /**
  * Animated mouse
  *
@@ -27,17 +25,17 @@ function Mouse ($el) {
 Mouse.prototype.scroll = function () {
   this.y = this.y === 0 ? -80 : 0;
 
-  var _this = this;
-
   this.$wheel.stop().animate({ opacity: 1 }, 400);
 
+  var y = this.y;
+
   this.$lines.stop().animate({
-      top: _this.y + '%'
+      top: y + '%'
     }, 500, function () {
-      _this.$wheel.stop().animate({
+      this.$wheel.stop().animate({
         opacity: 0.2
       }, 300);
-  });
+  }.bind(this));
 };
 
 /**
@@ -46,11 +44,9 @@ Mouse.prototype.scroll = function () {
  * @method start
  */
 Mouse.prototype.start = function () {
-  var _this = this;
-
   this.interval = window.setInterval(function () {
-    _this.scroll();
-  }, 2000);
+    this.scroll();
+  }.bind(this), 2000);
 };
 
 /**

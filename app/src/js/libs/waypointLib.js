@@ -49,6 +49,8 @@ module.exports = (function ($) {
     }
 
     function onResize () {
+      /*jshint validthis: true */
+
       viewportHeight = $viewport.height();
       threshold = viewportHeight * (parameters.offset / 100);
 
@@ -67,7 +69,7 @@ module.exports = (function ($) {
       var topLimit = scrollTop + threshold;
       var bottomLimit = scrollTop + (viewportHeight - threshold);
 
-      $els.each(function (i) {
+      $els.each(function () {
         var $el = $(this);
 
         var state = $el.attr('data-state');
@@ -121,6 +123,6 @@ module.exports = (function ($) {
         $viewport.off('scroll', onScroll);
       }
     };
-  }
+  };
 
 })(jQuery);

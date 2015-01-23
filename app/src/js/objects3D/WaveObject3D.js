@@ -29,8 +29,6 @@ function Wave (options) {
   }, options);
 
   var plane = this.getPlane();
-
-  var _this = this;
   
   var time = 0;
 
@@ -79,8 +77,6 @@ function Wave (options) {
   this.stop = function () {
     idleTween.pause();
   };
-
-  delete this.parameters;
 }
 
 /**
