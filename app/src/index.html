@@ -30,20 +30,20 @@
   </div>
 
   <script type="text/javascript">
-    /* jshint laxbreak: true */
-    
     document = window.document;
 
     (function () {
+      /* jshint strict: false */
+      /* jshint laxbreak: true */
 
       // disable console
-      // console.log('That\'s probably what you\'re looking for! https://github.com/vaalentin/2015');
+      console.log('That\'s probably what you\'re looking for! https://github.com/vaalentin/2015');
 
-      // if (!window.console) window.console = {};
-      // var methods = ['log', 'debug', 'warn', 'info'];
-      // for (var i = 0; i < methods.length; i++){
-      //   console[methods[i]] = function () {};
-      // }
+      if (!window.console) { window.console = {}; }
+      var methods = ['log', 'debug', 'warn', 'info'];
+      for (var i = 0; i < methods.length; i++){
+        console[methods[i]] = function () {};
+      }
 
       // features
       function mobile () {
@@ -76,10 +76,6 @@
       jsPayload.type = 'text/javascript';
       jsPayload.async = jsPayload.defer = false;
 
-      var jsPayload2 = document.createElement('script');
-      jsPayload2.type = 'text/javascript';
-      jsPayload2.async = jsPayload2.defer = false;
-
       var prefix;
       if (webGL() && !mobile()) {
         prefix = '3D';
@@ -88,14 +84,12 @@
       }
 
       cssPayload.href = './app/dist/css/' + prefix + '/main.css';
-      jsPayload.src = './app/dist/js/' + prefix + '/vendor.js';
-      jsPayload2.src = './app/dist/js/' + prefix + '/main.js';
+      jsPayload.src = './app/dist/js/' + prefix + '/bundle.js';
 
       var head = document.getElementsByTagName('head')[0];
 
       head.appendChild(cssPayload);
       head.appendChild(jsPayload);
-      head.appendChild(jsPayload2);
     })();
   </script>
 
