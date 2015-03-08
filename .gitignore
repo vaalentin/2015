@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-assets
 app/dist
 app/src/vendor
 /index.html
