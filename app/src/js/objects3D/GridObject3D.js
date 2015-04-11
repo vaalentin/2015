@@ -22,14 +22,7 @@ var yoyo = require('../utils/yoyoUtil');
  * @requires jQuery, THREE, TweenLite, random, yoyo
  */
 function Grid (options) {
-  this.parameters = jQuery.extend({
-    points: false,
-    divisionsSize: 10,
-    divisionsX: 11,
-    divisionsY: 11,
-    fromColor: '#ffffff',
-    toColor: '#0a0a0a'
-  }, options);
+  this.parameters = jQuery.extend(Grid.defaultOptions, options);
 
   this.width = (this.parameters.divisionsX - 1) * this.parameters.divisionsSize;
   this.height = (this.parameters.divisionsY - 1) * this.parameters.divisionsSize;
@@ -132,6 +125,15 @@ function Grid (options) {
     TweenLite.to(group.position, 1, { y: y });
   };
 }
+
+Grid.defaultOptions = {
+  points: false,
+  divisionsSize: 10,
+  divisionsX: 11,
+  divisionsY: 11,
+  fromColor: '#ffffff',
+  toColor: '#0a0a0a'
+};
 
 /**
  * Get vertices

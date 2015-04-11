@@ -20,13 +20,7 @@ var loop = require('../utils/loopUtil');
  * @requires jQuery, THREE, TweenLite, loop
  */
 function Wave (options) {
-  this.parameters = jQuery.extend({
-    amplitude: 10,
-    divisionSize: 2,
-    divisionsX: 50,
-    divisionsY: 50,
-    speed: 10
-  }, options);
+  this.parameters = jQuery.extend(Wave.defaultOptions, options);
 
   var plane = this.getPlane();
   
@@ -78,6 +72,14 @@ function Wave (options) {
     idleTween.pause();
   };
 }
+
+Wave.defaultOptions = {
+  amplitude: 10,
+  divisionSize: 2,
+  divisionsX: 50,
+  divisionsY: 50,
+  speed: 10
+};
 
 /**
  * Get wave's plane

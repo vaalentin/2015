@@ -21,131 +21,152 @@ var yoyo = require('../utils/yoyoUtil');
  * @requires jQuery, THREE, TweenLite, SOUNDS, random, yoyo
  */
 function Neon (options) {
-  this.parameters = jQuery.extend({
-    color: '#ffffff',
-    width: 20,
-    projection: true,
-    planes: 3
-  }, options);
+  this.parameters = jQuery.extend(Neon.defaultOptions, options);
 
-  var group = new THREE.Object3D();
+  this.el = new THREE.Object3D();
 
-  var tube = this.getTube();
-  group.add(tube);
+  // setup 3d els
+  this.tube = this.getTube();
+  this.glow = this.getGlow();
 
-  var glow = this.getGlow();
-  var glows = this.getGlows(glow);
-  group.add(glows);
+  var glows = this.getGlows(this.glow);
+
+  this.el.add(this.tube);
+  this.el.add(glows);
 
   if (this.parameters.projection) {
-    var projection = this.getProjection();
-    group.add(projection);
+    this.projection = this.getProjection();
+    this.el.add(this.projection);
   }
+
+  // flicker
+  this.currentFlicker = 0;
+  this.totalFlicker = random(3, 6, true);
+  this.flickering = false;
 
   // animations
   var _this = this;
 
-  var currentFlicker = 0;
-  var totalFlicker = random(3, 6, true);
-  var flickering = false;
+  this.idleIntensityTween = TweenLite.to({ projection: 0.08, glow: 0.4 }, random(0.8, 5), {
+    projection: 0.15, glow: 0.7, paused: true,
+    onStart: function () {
+      _this.tube.material.emissive.set(_this.parameters.color);
+    },
+    onUpdate: function () {
+      if (_this.flickering) {
+        return false;
+      }
 
-  // Flick once from off to on
-  function flickOn () {
-    tube.material.emissive.set(_this.parameters.color);
-    tube.material.needsUpdate = true;
+      _this.glow.material.opacity = this.target.glow;
+      if (_this.parameters.projection) {
+        _this.projection.opacity = this.target.opacity;
+      }
+    },
+    onComplete: yoyo,
+    onReverseComplete: yoyo
+  });
 
-    glow.material.opacity = 0.3;
+  this.idleFlickTween = TweenLite.to({}, random(0.1, 10), { paused: true,
+    onComplete: function () {
+      _this.flickOff();
+      this.duration(random(0.1, 10));
+      this.restart();
+    }
+  });
+
+  this.inTween = TweenLite.to({}, random(0.2, 2), { paused: true,
+    onComplete: function () {
+      if (_this.currentFlicker++ < _this.totalFlicker) {
+        _this.flickOn();
+        this.duration(random(0.1, 0.5));
+        this.restart();
+      }
+      else {
+        _this.animations = [_this.idleIntensityTween, _this.idleFlickTween];
+        _this.start();
+      }
+    }
+  });
+
+  this.animations = [this.inTween];
+};
+
+Neon.defaultOptions = {
+  color: '#ffffff',
+  width: 20,
+  projection: true,
+  planes: 3
+};
+
+/**
+ * Start animations sequence
+ */
+Neon.prototype.start = function () {
+  for (var i = 0, j = this.animations.length; i < j; i++) {
+    this.animations[i].resume();
+  }
+};
+
+/**
+ * Stop animations sequence
+ */
+Neon.prototype.stop = function () {
+  for (var i = 0, j = this.animations.length; i < j; i++) {
+    this.animations[i].pause();
+  }
+};
+
+/**
+ * Flick on once
+ * from off to on
+ */
+Neon.prototype.flickOn = function () {
+  this.tube.material.emissive.set(this.parameters.color);
+  this.tube.material.needsUpdate = true;
+
+  this.glow.material.opacity = 0.3;
+
+  if (this.parameters.projection) {
+    this.projection.material.opacity = 0.05;
+  }
+
+  SOUNDS.neon.play();
+
+  var _this = this;
+
+  TweenLite.delayedCall(random(0.05, 0.07), function () {
+    _this.tube.material.emissive.set('#000000');
+    _this.tube.material.needsUpdate = true;
+
+    _this.glow.material.opacity = 0;
 
     if (_this.parameters.projection) {
-      projection.material.opacity = 0.05;
+      _this.projection.material.opacity = 0;
     }
+  });
+};
+
+/**
+ * Flick off once
+ * from on to off
+ */
+Neon.prototype.flickOff = function () {
+  this.flickering = !this.flickering;
+  
+  this.glow.material.opacity = 0;
+
+  if (this.parameters.projection) {
+    this.projection.material.opacity = 0.05;
+  }
+
+  var _this = this;
+
+  TweenLite.delayedCall(random(0.05, 0.1), function () {
+    _this.flickering = !_this.flickering;
 
     SOUNDS.neon.play();
-
-    TweenLite.delayedCall(random(0.05, 0.07), function () {
-      tube.material.emissive.set('#000000');
-      tube.material.needsUpdate = true;
-
-      glow.material.opacity = 0;
-
-      if (_this.parameters.projection) {
-        projection.material.opacity = 0;
-      }
-    });
-  }
-
-  // Flick once from on to off
-  function flickOff () {
-    flickering = !flickering;
-    
-    glow.material.opacity = 0;
-
-    if (_this.parameters.projection) {
-      projection.material.opacity = 0.05;
-    }
-
-    TweenLite.delayedCall(random(0.05, 0.1), function () {
-      flickering = !flickering;
-
-      SOUNDS.neon.play();
-    });
-  }
-
-  var idleTweens = {
-    intensity: TweenLite.to({ projection: 0.08, glow: 0.4 }, random(0.8, 5), { projection: 0.15, glow: 0.7, paused: true,
-        onStart: function () {
-          tube.material.emissive.set(_this.parameters.color);
-        },
-        onUpdate: function () {
-          if (!flickering) {
-            glow.material.opacity = this.target.glow;
-            if (_this.parameters.projection) {
-              projection.material.opacity = this.target.projection;
-            }
-          }
-        },
-        onComplete: yoyo,
-        onReverseComplete: yoyo
-      }),
-
-    flick: TweenLite.to({}, random(0.1, 10), { paused: true,
-        onComplete: function () {
-          flickOff();
-          this.duration(random(0.1, 10));
-          this.restart();
-        }
-      })
-  };
-
-  var inTween = TweenLite.to({}, random(0.2, 2), { paused: true,
-      onComplete: function () {
-        if (currentFlicker++ < totalFlicker) {
-          flickOn();
-          this.duration(random(0.1, 0.5));
-          this.restart();
-        } else {
-          animations = [idleTweens.intensity, idleTweens.flick];
-          _this.start();
-        }
-      }
-    });
-
-  var animations = [inTween];
-
-  this.el = group;
-  
-  this.start = function () {
-    for (var i = 0, j = animations.length; i < j; i++) {
-      animations[i].resume();
-    }
-  };
-
-  this.stop = function () {
-    for (var i = 0, j = animations.length; i < j; i++) {
-      animations[i].pause();
-    }
-  };
-}
+  });
+};
 
 /**
  * Get neon tube

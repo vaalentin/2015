@@ -20,14 +20,7 @@ var TweenLite = require('tweenlite');
  * @requires jQuery, THREE, TweenLite
  */
 function TextPanel (text, options) {
-  var parameters = jQuery.extend({
-    size: 100,
-    font: 'Futura, Trebuchet MS, Arial, sans-serif',
-    style: 'Bold',
-    align: 'center',
-    lineSpacing: 20,
-    color: 'rgba(200, 200, 200, 1)'
-  }, options);
+  var parameters = jQuery.extend(TextPanel.defaultOptions, options);
 
   text = text || '';
 
@@ -136,5 +129,14 @@ function TextPanel (text, options) {
     });
   };
 }
+
+TextPanel.defaultOptions = {
+  size: 100,
+  font: 'Futura, Trebuchet MS, Arial, sans-serif',
+  style: 'Bold',
+  align: 'center',
+  lineSpacing: 20,
+  color: 'rgba(200, 200, 200, 1)'
+};
 
 module.exports = TextPanel;

@@ -20,13 +20,7 @@ var random = require('../utils/randomUtil');
  * @requires jQuery, THREE, random
  */
 function BackgroundParticles (options) {
-  var parameters = jQuery.extend({
-    count: 1000,
-    particleSize: 0.5,
-    rangeY: [-100, 100],
-    strips: true,
-    stripsCount: 20
-  }, options);
+  var parameters = jQuery.extend(BackgroundParticles.defaultOptions, options);
 
   var material = new THREE.PointCloudMaterial({
     size: parameters.particleSize
@@ -79,5 +73,13 @@ function BackgroundParticles (options) {
 
   this.el = group;
 }
+
+BackgroundParticles.defaultOptions = {
+  count: 1000,
+  particleSize: 0.5,
+  rangeY: [-100, 100],
+  strips: true,
+  stripsCount: 20
+};
 
 module.exports = BackgroundParticles;

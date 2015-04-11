@@ -23,33 +23,23 @@ var random = require('../utils/randomUtil');
  * @requires jQuery, THREE, TweenLite, random
  */
 function Strip (options) {
-  var parameters = jQuery.extend({
-    count: 10,
-    colors: ['#ffffff'],
-    width: 10,
-    height: 3,
-    speed: 1,
-    rangeX: [-50, 50],
-    rangeY: [-50, 50],
-    rangeZ: [-50, 50]
-  }, options);
+  this.parameters = jQuery.extend(Strip.defaultOptions, options);
+
+  this.geometry = new THREE.PlaneGeometry(this.parameters.width, this.parameters.height);
+
+  this.el = new THREE.Object3D();
 
   var materials = {};
 
-  var geometry = new THREE.PlaneGeometry(parameters.width, parameters.height);
+  for (var i = 0; i < this.parameters.count; i++) {
+    var x = random(this.parameters.rangeX[0], this.parameters.rangeX[1]);
+    var y = random(this.parameters.rangeY[0], this.parameters.rangeY[1]);
+    var z = random(this.parameters.rangeZ[0], this.parameters.rangeZ[1]);
 
-  var group = new THREE.Object3D();
+    var color = this.parameters.colors[random(0, this.parameters.colors.length, true)];
 
-  for (var i = 0; i < parameters.count; i++) {
-    var x = random(parameters.rangeX[0], parameters.rangeX[1]);
-    var y = random(parameters.rangeY[0], parameters.rangeY[1]);
-    var z = random(parameters.rangeZ[0], parameters.rangeZ[1]);
-
-    var material;
-    var color = parameters.colors[random(0, parameters.colors.length, true)];
-    
     if (!materials[color]) {
-      material = new THREE.MeshBasicMaterial({
+      var material = new THREE.MeshBasicMaterial({
         color: color,
         side: THREE.DoubleSide
       });
@@ -57,37 +47,45 @@ function Strip (options) {
       materials[color] = material;
     }
 
-    var mesh = new THREE.Mesh(geometry, materials[color]);
+    var mesh = new THREE.Mesh(this.geometry, materials[color]);
     mesh.position.set(x, y, z);
-    group.add(mesh);
+    this.el.add(mesh);
   }
 
-  // cache values
-  var from = geometry.vertices[0].x;
-  var to = geometry.vertices[1].x;
+  this.from = this.geometry.vertices[0].x;
+  this.to = this.geometry.vertices[1].x;
+  this.cache =  { x: this.from };
 
-  geometry.vertices[1].x = geometry.vertices[3].x = geometry.vertices[0].x;
+  this.geometry.vertices[1].x = this.geometry.vertices[3].x = this.geometry.vertices[0].x;
+};
 
-  var cache = { x: from };
+Strip.prototype.update = function () {
+  this.geometry.vertices[1].x = this.geometry.vertices[3].x = this.cache.x;
+  this.geometry.verticesNeedUpdate = true;
+  this.geometry.computeBoundingSphere();
+};
 
-  function update () {
-    /*jshint validthis: true */
-    
-    geometry.vertices[1].x = geometry.vertices[3].x = this.target.x;
+Strip.prototype.in = function () {
+  TweenLite.to(this.cache, this.parameters.speed, { x: this.to,
+    onUpdate: this.update.bind(this)
+  });
+};
 
-    geometry.verticesNeedUpdate = true;
-    geometry.computeBoundingSphere();
-  }
+Strip.prototype.out = function () {
+  TweenLite.to(this.cache, this.parameters.speed, { x: this.from,
+    onUpdate: this.update.bind(this)
+  });
+};
 
-  this.el = group;
-
-  this.in = function () {
-    TweenLite.to(cache, parameters.speed, { x: to, onUpdate: update });
-  };
-
-  this.out = function () {
-    TweenLite.to(cache, parameters.speed, { x: from, onUpdate: update });
-  };
-}
+Strip.defaultOptions = {
+  count: 10,
+  colors: ['#ffffff'],
+  width: 10,
+  height: 3,
+  speed: 1,
+  rangeX: [-50, 50],
+  rangeY: [-50, 50],
+  rangeZ: [-50, 50]
+};
 
 module.exports = Strip;

@@ -19,17 +19,12 @@ var random = require('../utils/randomUtil');
  * @requires jQuery, THREE, SPRITE3D, random
  */
 function Smoke (options) {
-  var parameters = jQuery.extend({
-    frontColor: '#9b69b2',
-    backColor: '#e1455f',
-    layers: 5,
-    data: []
-  }, options);
+  var parameters = jQuery.extend(Smoke.defaultOptions, options);
 
   var texture = new THREE.ImageUtils.loadTexture('./app/public/img/sprite-smoke.png');
   texture.flipY = false;
 
-  var sprite = new SPRITE3D.Sprite(texture, {
+  this.sprite = new SPRITE3D.Sprite(texture, {
     horizontal: 8,
     vertical: 8,
     total: 64,
@@ -52,7 +47,7 @@ function Smoke (options) {
 
   var geometry = new THREE.PlaneGeometry(10, 10);
 
-  var group = new THREE.Object3D();
+  this.el = new THREE.Object3D();
 
   for (var i = 0; i < parameters.layers; i++) {
     var positionX;
@@ -82,18 +77,23 @@ function Smoke (options) {
     plane.rotation.z = rotationZ;
     plane.scale.set(scale, scale, 1);
 
-    group.add(plane);
+    this.el.add(plane);
   }
-
-  this.el = group;
-
-  this.start = function () {
-    sprite.start();
-  };
-
-  this.stop = function () {
-    sprite.stop();
-  };
 }
+
+Smoke.prototype.start = function () {
+  this.sprite.start();
+};
+
+Smoke.prototype.stop = function () {
+  this.sprite.stop();
+};
+
+Smoke.defaultOptions = {
+  frontColor: '#9b69b2',
+  backColor: '#e1455f',
+  layers: 5,
+  data: []
+};
 
 module.exports = Smoke;

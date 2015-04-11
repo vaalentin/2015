@@ -21,14 +21,7 @@ var random = require('../utils/randomUtil');
  * @requires jQuery, THREE
  */
 function Grid (options) {
-  this.parameters = jQuery.extend({
-    stepsX: 10,
-    stepsY: 10,
-    stepSize: 2,
-    linesFromColor: '#ffffff',
-    linesToColor: '#333333',
-    points: false
-  }, options);
+  this.parameters = jQuery.extend(Grid.defaultOptions, options);
 
   this.lines = null;
   this.points = null;
@@ -39,6 +32,15 @@ function Grid (options) {
   this.init();
   this.render();
 }
+
+Grid.defaultOptions = {
+  stepsX: 10,
+  stepsY: 10,
+  stepSize: 2,
+  linesFromColor: '#ffffff',
+  linesToColor: '#333333',
+  points: false
+};
 
 /**
  * Initialize

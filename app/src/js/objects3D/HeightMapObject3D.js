@@ -30,17 +30,7 @@ var map = require('../utils/mapUtil');
  * @requires jQuery, THREE, TweenLite, Events, random, map
  */
 function HeightMap (options) {
-  this.parameters = jQuery.extend({
-    horizontal: true,
-    vertical: false,
-    plane: false,
-    points: false,
-    divisionsX: 30,
-    divisionsY: 30,
-    fromColor: '#4c4c4c',
-    toColor: '#ffffff',
-    maps: []
-  }, options);
+  this.parameters = jQuery.extend(HeightMap.defaultOptions, options);
 
   this.events = new Events();
 
@@ -96,6 +86,18 @@ function HeightMap (options) {
     };
   }.bind(this));
 }
+
+HeightMap.defaultOptions = {
+  horizontal: true,
+  vertical: false,
+  plane: false,
+  points: false,
+  divisionsX: 30,
+  divisionsY: 30,
+  fromColor: '#4c4c4c',
+  toColor: '#ffffff',
+  maps: []
+};
 
 /**
  * Get plane

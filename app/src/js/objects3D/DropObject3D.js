@@ -18,11 +18,7 @@ var loop = require('../utils/loopUtil');
  * @requires jQuery, THREE, TweenLite, loop
  */
 function Drop (options) {
-  this.parameters = jQuery.extend({
-    count: 6,
-    color: '#ffffff',
-    amplitude: 2
-  }, options);
+  this.parameters = jQuery.extend(Drop.defaultOptions, options);
 
   var group = new THREE.Object3D();
 
@@ -75,6 +71,12 @@ function Drop (options) {
     }
   };
 }
+
+Drop.defaultOptions = {
+  count: 6,
+  color: '#ffffff',
+  amplitude: 2
+};
 
 /**
  * Get water ripple plane

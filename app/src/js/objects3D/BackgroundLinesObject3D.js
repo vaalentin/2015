@@ -16,10 +16,7 @@ var random = require('../utils/randomUtil');
  * @requires jQuery, THREE, random
  */
 function BackgroundLines (options) {
-  var parameters = jQuery.extend({
-    count: 200,
-    rangeY: [-100, 100]
-  }, options);
+  var parameters = jQuery.extend(BackgroundLines.defaultOptions, options);
 
   var group = new THREE.Object3D();
 
@@ -38,6 +35,11 @@ function BackgroundLines (options) {
   this.el = group;
   this.line = line;
 }
+
+BackgroundLines.defaultOptions = {
+  count: 200,
+  rangeY: [-100, 100]
+};
 
 /**
  * Get base line

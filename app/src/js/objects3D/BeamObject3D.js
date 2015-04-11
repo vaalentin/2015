@@ -21,13 +21,7 @@ var yoyo = require('../utils/yoyoUtil');
  * @requires jQuery, THREE, TweenLite, random, yoyo
  */
 function Beam (options) {
-  var parameters = jQuery.extend({
-    color: '#ffffff',
-    height: 15,
-    width: 2,
-    cubeSize: 0.5,
-    delay: 0
-  }, options);
+  var parameters = jQuery.extend(Beam.defaultOptions, options);
 
   var width = parameters.width;
   var height = parameters.height;
@@ -198,5 +192,13 @@ function Beam (options) {
     idleTweens.body.pause();
   };
 }
+
+Beam.defaultOptions = {
+  color: '#ffffff',
+    height: 15,
+    width: 2,
+    cubeSize: 0.5,
+    delay: 0
+  };
 
 module.exports = Beam;

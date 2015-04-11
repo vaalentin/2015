@@ -26,18 +26,7 @@ var map = require('../utils/mapUtil');
  * @requires jQuery, THREE, TweenLite, random, noise, map
  */
 function FlowField (points, options) {
-  this.parameters = jQuery.extend({
-    subsNumber: 3,
-    subsAmplitude: 30,
-    subsPrecision: 10,
-    noiseXincrement: 0.1,
-    moiseYincrement: 0.1,
-    noiseZincrement: 0.1,
-    renderResolution: 100,
-    mainColor: '#ffffff',
-    subsColor: '#4c4c4c',
-    subsHiddenColo: '#0a0a0a'
-  }, options);
+  this.parameters = jQuery.extend(FlowField.defaultOptions, options);
 
   var group = new THREE.Object3D();
 
@@ -88,6 +77,19 @@ function FlowField (points, options) {
     }
   };
 }
+
+FlowField.defaultOptions = {
+  subsNumber: 3,
+  subsAmplitude: 30,
+  subsPrecision: 10,
+  noiseXincrement: 0.1,
+  moiseYincrement: 0.1,
+  noiseZincrement: 0.1,
+  renderResolution: 100,
+  mainColor: '#ffffff',
+  subsColor: '#4c4c4c',
+  subsHiddenColo: '#0a0a0a'
+};
 
 /**
  * Get main and subs curves

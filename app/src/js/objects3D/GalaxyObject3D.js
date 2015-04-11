@@ -21,12 +21,7 @@ var loop = require('../utils/loopUtil');
  * @requires jQuery, THREE, TweenLite, random, map, loop
  */
 function Galaxy (options) {
-  this.parameters = jQuery.extend({
-    ringFromColor: '#ffffff',
-    ringToColor: '#333333',
-    ringDivisions: 100,
-    ringColorSteps: 30
-  }, options);
+  this.parameters = jQuery.extend(Galaxy.defaultOptions, options);
 
   var group = new THREE.Object3D();
 
@@ -135,6 +130,13 @@ function Galaxy (options) {
     idleTween.pause();
   };
 }
+
+Galaxy.defaultOptions = {
+  ringFromColor: '#ffffff',
+  ringToColor: '#333333',
+  ringDivisions: 100,
+  ringColorSteps: 30
+};
 
 /**
  * Get base planet
