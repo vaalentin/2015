@@ -34,6 +34,7 @@ var faceSection = require('./sections/faceSection');
 var rocksSection = require('./sections/rocksSection');
 var galaxySection = require('./sections/galaxySection');
 var gravitySection = require('./sections/gravitySection');
+var citySection = require('./sections/citySection');
 var endSection = require('./sections/endSection');
 
 jQuery(function () {
@@ -113,6 +114,7 @@ jQuery(function () {
     rocksSection,
     galaxySection,
     gravitySection,
+    citySection,
     endSection
   ]);
 
