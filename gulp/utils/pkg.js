@@ -18,6 +18,7 @@ var pkg = (function () {
     
     return {
       debug: data.debug || false,
+      watch: data.watch || false,
       vendor: data.browser || {}
     }
   }

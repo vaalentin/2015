@@ -24,14 +24,15 @@ gulp.task('html', function () {
     .pipe(gulp.dest('./'))
     .pipe(notify({ title: 'Html', message: 'Success', sound: 'Morse' }));
   
-  gulp.watch([
-      './app/src/**/*.html',
-      '!./app/src/{vendor,vendor/**}'
-    ], function (file) {
-      gulp.src(file.path)
-        .pipe(pkg.debug || false ? gutil.noop() : minify())
-        .pipe(gulp.dest('./'))
-        .pipe(notify({ title: 'Html', message: 'Success', sound: 'Morse' }));
-    });
-
+  if(pkg.watch) {
+    gulp.watch([
+        './app/src/**/*.html',
+        '!./app/src/{vendor,vendor/**}'
+      ], function (file) {
+        gulp.src(file.path)
+          .pipe(pkg.debug || false ? gutil.noop() : minify())
+          .pipe(gulp.dest('./'))
+          .pipe(notify({ title: 'Html', message: 'Success', sound: 'Morse' }));
+      });
+  }
 });

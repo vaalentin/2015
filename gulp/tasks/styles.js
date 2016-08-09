@@ -31,7 +31,9 @@ function styles (input, output, message) {
 
   process();
 
-  gulp.watch('./app/src/less/**/*.less', process);
+  if(pkg.watch) {
+    gulp.watch('./app/src/less/**/*.less', process);
+  }
 }
 
 gulp.task('styles:3D', function () {

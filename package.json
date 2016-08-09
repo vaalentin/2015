@@ -1,6 +1,7 @@
 {
   "name": "2015",
   "debug": false,
+  "watch": false,
   "devDependencies": {
     "browserify": "^6.3.2",
     "browserify-shim": "^3.8.0",

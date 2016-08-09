@@ -17,7 +17,10 @@ function scripts (entry, output, message) {
 
   var outputDetails = splitPath(output);
 
-  var bundler = watchify(browserify(entry, { debug: pkg.debug }));
+  var bundler = pkg.watch
+    ? watchify(browserify(entry, { debug: pkg.debug }))
+    : browserify({ entries: [entry] })
+
   bundler.on('update', bundle);
 
   function bundle() {
